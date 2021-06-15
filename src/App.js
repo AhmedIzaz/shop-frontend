@@ -23,6 +23,7 @@ function App() {
         </div>
         <Switch>
           <Route path="/" component={Dashboard} />
+
           <Route component={Error} />
         </Switch>
       </Router>
