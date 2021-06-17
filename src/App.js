@@ -4,6 +4,8 @@ import {
   NavLink,
   Switch,
 } from "react-router-dom";
+import Category from "./components/Category/Category";
+import Profile from "./components/customer/Profile";
 import Dashboard from "./components/shop/Dashboard";
 import Error from "./components/shop/Error";
 
@@ -20,9 +22,36 @@ function App() {
           >
             Home
           </NavLink>
+
+          <NavLink
+            exact
+            activeStyle={{ color: "black" }}
+            className="nav-link"
+            to="/categories"
+          >
+            Categories
+          </NavLink>
+
+          {/* <NavLink className="nav-link">
+            <form id="search-box">
+              <input type="text" />
+              <button type="submit">Search</button>
+            </form>
+          </NavLink> */}
+
+          <NavLink
+            exact
+            activeStyle={{ color: "black" }}
+            className="nav-link"
+            to="/customer-profile"
+          >
+            Profile
+          </NavLink>
         </div>
         <Switch>
-          <Route path="/" component={Dashboard} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/categories" exact component={Category} />
+          <Route path="/customer-profile" exact component={Profile} />
           <Route component={Error} />
         </Switch>
       </Router>
