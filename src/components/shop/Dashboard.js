@@ -9,7 +9,8 @@ export default function Dashboard() {
       .get("http://localhost:8000/")
       .then((dataPacket) => {
         setProducts(dataPacket.data.product);
-        setCategories(dataPacket.data.product_category);
+        // setCategories(dataPacket.data.product_category);
+        console.log(dataPacket.data.product);
       })
       .catch((error) => {
         alert(error.message);
@@ -19,12 +20,12 @@ export default function Dashboard() {
     <div id="dashboard">
       <div>
         <ul>
-          {products.map((product) => {
+          {/* {products.map((product) => {
             <li className="home-product-item">
               <a>{product.product_name}</a>
               <span>{product.description}</span>
             </li>;
-          })}
+          })} */}
         </ul>
       </div>
     </div>
