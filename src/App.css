@@ -1,3 +1,70 @@
 .App {
   text-align: center;
 }
+
+div#navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: rgb(15, 120, 190);
+}
+
+div#navigation .nav-link {
+  padding: 20px;
+  font-size: 20px;
+  color: antiquewhite;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#home-product-categories {
+  width: 800px;
+}
+
+#home-product-categories ul {
+  display: flex;
+  flex-direction: row;
+
+  overflow-y: hidden;
+  overflow-x: auto;
+  list-style-type: none;
+}
+
+#home-product-categories ul li {
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+}
+
+#home-product-categories ul li:hover {
+  background-color: rgb(168, 220, 255);
+  transform: translateY(-10px);
+  transition: 0.5s;
+}
+
+#home-products {
+  width: 800px;
+  height: 250px;
+}
+
+#home-products ul {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  background-color: rgb(240, 252, 227);
+  overflow-y: hidden;
+  overflow-x: auto;
+  list-style-type: none;
+}
+
+#home-products ul li {
+  width: 200px;
+
+  padding: 10px;
+}
+
+#home-products ul li:hover {
+  transform: translateY(-10px);
+  transition: 0.5s;
+}

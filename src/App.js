@@ -8,27 +8,18 @@ import Category from "./components/Category/Category";
 import Profile from "./components/customer/Profile";
 import Dashboard from "./components/shop/Dashboard";
 import Error from "./components/shop/Error";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <div id="navigation">
-          <NavLink
-            exact
-            activeStyle={{ color: "black" }}
-            className="nav-link"
-            to="/"
-          >
+          <NavLink className="nav-link" to="/">
             Home
           </NavLink>
 
-          <NavLink
-            exact
-            activeStyle={{ color: "black" }}
-            className="nav-link"
-            to="/categories"
-          >
+          <NavLink className="nav-link" to="/categories">
             Categories
           </NavLink>
 
@@ -39,12 +30,7 @@ function App() {
             </form>
           </NavLink> */}
 
-          <NavLink
-            exact
-            activeStyle={{ color: "black" }}
-            className="nav-link"
-            to="/customer-profile"
-          >
+          <NavLink className="nav-link" to="/customer-profile">
             Profile
           </NavLink>
         </div>
