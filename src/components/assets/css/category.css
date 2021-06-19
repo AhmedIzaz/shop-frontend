@@ -4,14 +4,20 @@
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   list-style-type: none;
   justify-content: space-around;
 }
 
 #product-categories-page ul li {
-  width: 200px;
+  max-width: 200px;
   height: 150px;
+}
+
+#product-categories-page ul li a {
+  text-decoration: none;
+  color: black;
 }
 
 #product-categories-page ul li:hover {

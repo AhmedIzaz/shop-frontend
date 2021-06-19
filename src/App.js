@@ -10,6 +10,7 @@ import Dashboard from "./components/shop/Dashboard";
 import Error from "./components/shop/Error";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import CategoriesProducts from "./components/Category/CategoriesProducts";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/categories" exact component={Category} />
+          <Route path="/categories/category/:category_id" component={CategoriesProducts} />
           <Route path="/customer-profile" exact component={Profile} />
           <Route component={Error} />
         </Switch>

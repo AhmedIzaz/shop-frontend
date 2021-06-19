@@ -20,40 +20,53 @@ div#navigation .nav-link {
 
 #home {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   grid-template-rows: 200px 200px 200px 200px 200px 200px;
+  position: relative;
 }
 
-.add-1 {
+.grid-item1 {
+  position: absolute;
   grid-column-start: 1;
   grid-column-end: 2;
-
+  grid-row-start: 1;
+  grid-row-end: 2;
   margin: 10px 0px 0px 10px;
 }
 
-.add-2 {
-  right: 0;
-  grid-column-start: 3;
-  margin: 10px 10px 0px 0px;
+.grid-item2 {
+  min-width: 600px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
-.add-1,
-.add-2 {
-  color: aliceblue;
-  background-color: rgb(90, 41, 136);
+.grid-item3 {
+  grid-column-start: 4;
+  grid-column-end: 5;
   grid-row-start: 1;
-  grid-row-end: 6;
-  width: 150px;
+  grid-row-end: 2;
+  right: 0;
   position: absolute;
+  margin: 10px 10px 0px 0px;
+}
+.grid-item4 {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.grid-item5 {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 5;
+  grid-row-end: 6;
 }
 
 #home-product-categories {
-  width: 1200px;
   margin: auto;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 4;
 }
 
 #home-product-categories ul {
@@ -78,13 +91,7 @@ div#navigation .nav-link {
 }
 
 #home-products {
-  width: 1200px;
-  height: 250px;
   margin: auto;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 5;
-  grid-row-end: 6;
 }
 
 #home-products ul {
@@ -112,25 +119,16 @@ div#navigation .nav-link {
 }
 
 #slideshow {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
   top: 20px;
-  width: 1200px;
   height: 20em;
   position: relative;
   overflow: hidden;
-  margin: auto;
 }
 
 #slideshow > * {
+  margin: 0px 50px 0px 150px;
   position: absolute;
   animation: 12s autoplay1 infinite ease-in-out;
-}
-
-#slideshow > * > img {
-  width: 600px;
 }
 
 @keyframes autoplay1 {
@@ -160,6 +158,12 @@ div#navigation .nav-link {
 #slideshow > *:nth-child(3) {
   animation-delay: 8s;
 }
+
+.slideshow-item img {
+  width: 600px;
+  max-width: 800px;
+}
+
 .footer {
   bottom: 0;
   left: 0;
