@@ -13,8 +13,53 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
-      <div id="home-product-categories">
+    <div id="home">
+      <div className="grid-item add-1">
+        <p>advertise is here</p>
+        <br></br>
+        <span>
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+        </span>
+      </div>
+
+      <div className="grid-item add-2">
+        <p>advertise is here</p>
+        <br></br>
+        <span>
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+          all advertise are here all advertise are here all advertise are here
+        </span>
+      </div>
+
+      <div className="grid-item" id="slideshow">
+        <div className="slideshow-item item1">
+          <img src="https://blog.corp-site.envato.com/cdn-cgi/image/width=1200,quality=95,format=auto/uploads/2020/07/eCommerce-Trends-2020.png" />
+        </div>
+        <div className="slideshow-item item2">
+          <img src="https://www.bigcommerce.com/blog/wp-content/uploads/2019/01/ecommerce-marketing-hero-img.jpg" />
+        </div>
+        <div>
+          <img
+            className="slideshow-item item3"
+            src="https://www.makdigitaldesign.com/wp-content/uploads/2020/02/ecommerce-1.png"
+          />
+        </div>
+      </div>
+
+      <div className="grid-item" id="home-product-categories">
         <h3>Product Categories</h3>
         <ul>
           {categories.map((category) => {
@@ -28,7 +73,7 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div id="home-products">
+      <div className="grid-item" id="home-products">
         <h3>Products</h3>
         <ul>
           {products.map((product) => {

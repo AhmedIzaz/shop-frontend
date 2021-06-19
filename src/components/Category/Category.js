@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import "../assets/css/category.css";
 export default function Category() {
   const [categories, setCategories] = useState([]);
 
@@ -13,14 +13,14 @@ export default function Category() {
   }, []);
 
   return (
-    <div id="product-categories">
+    <div id="product-categories-page">
       <h3>All Product Categories</h3>
       <ul>
         {categories.map((category) => {
           return (
             <li className="product-category">
               <h4>{category.product_category_name}</h4>
-              <small>{category.description}</small>
+              <p>{category.description}</p>
             </li>
           );
         })}

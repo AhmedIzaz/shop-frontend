@@ -8,6 +8,7 @@ import Category from "./components/Category/Category";
 import Profile from "./components/customer/Profile";
 import Dashboard from "./components/shop/Dashboard";
 import Error from "./components/shop/Error";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 function App() {
@@ -23,12 +24,12 @@ function App() {
             Categories
           </NavLink>
 
-          {/* <NavLink className="nav-link">
-            <form id="search-box">
-              <input type="text" />
-              <button type="submit">Search</button>
-            </form>
-          </NavLink> */}
+          <form id="search-box" className="nav-link">
+            <input id="input-box" type="text" />
+            <button className="btn btn-secondary btn-sm" type="submit">
+              Search
+            </button>
+          </form>
 
           <NavLink className="nav-link" to="/customer-profile">
             Profile
@@ -41,6 +42,26 @@ function App() {
           <Route component={Error} />
         </Switch>
       </Router>
+      <footer className="footer">
+        <div className="footer-item">
+          <h6>Address</h6>
+          <span>street: 1 dhaka, baridhara</span>
+          <br></br>
+          <span>Gulshan dhaka</span>
+        </div>
+        <div className="footer-item">
+          <h6>Address</h6>
+          <span>street: 1 dhaka, baridhara</span>
+          <br></br>
+          <span>Gulshan dhaka</span>
+        </div>
+        <div className="footer-item">
+          <h6>Address</h6>
+          <span>street: 1 dhaka, baridhara</span>
+          <br></br>
+          <span>Gulshan dhaka</span>
+        </div>
+      </footer>
     </div>
   );
 }
