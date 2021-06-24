@@ -23,7 +23,6 @@ export default function Category() {
             <li className="product-category">
               <Link to={link}>
                 <h5>
-                  {" "}
                   ({index + 1}) {category.product_category_name}
                 </h5>
                 <p>{category.description}</p>
