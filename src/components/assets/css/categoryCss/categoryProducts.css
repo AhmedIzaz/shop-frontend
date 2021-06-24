@@ -18,11 +18,17 @@
   background-color: rgb(236, 228, 195);
 }
 
+#categories-products a {
+  text-decoration: none;
+  color: black;
+}
+
 .categories-product {
   padding: 20px;
   width: 400px;
   background-color: cornsilk;
 }
+
 .categories-product:hover {
   transform: translateY(-10px);
   transition: 0.5s;

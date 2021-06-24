@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../assets/css/categoryCss/categoryProducts.css";
+
 
 export default function CategoriesProducts() {
   const [category, setCategory] = useState({});
@@ -27,11 +28,14 @@ export default function CategoriesProducts() {
 
       <div id="categories-products">
         {products.map((product, index) => {
+          const product_link = `/products/product/${product.id}`
           return (
-            <div className="categories-product">
-              <h5>{product.product_name}</h5>
-              <p>{product.description}</p>
-            </div>
+            <Link to={product_link}>
+              <div className="categories-product">
+                <h5>{product.product_name}</h5>
+                <p>{product.description}</p>
+              </div>
+            </Link>
           );
         })}
       </div>

@@ -20,14 +20,16 @@ export default function Category() {
         {categories.map((category, index) => {
           const link = `/categories/category/${category.id}`;
           return (
-            <li className="product-category">
-              <Link to={link}>
+
+            <Link to={link}>
+              <li className="product-category">
                 <h5>
                   ({index + 1}) {category.product_category_name}
                 </h5>
                 <p>{category.description}</p>
-              </Link>
-            </li>
+              </li>
+            </Link>
+
           );
         })}
       </ul>
