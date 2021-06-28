@@ -24,6 +24,7 @@
 }
 
 .categories-product {
+  position: relative;
   padding: 20px;
   width: 400px;
   background-color: cornsilk;
@@ -32,4 +33,11 @@
 .categories-product:hover {
   transform: translateY(-10px);
   transition: 0.5s;
+}
+
+.add-card-btn {
+  position: absolute;
+  left: 35%;
+  bottom: 0%;
+  margin-bottom: 5px;
 }

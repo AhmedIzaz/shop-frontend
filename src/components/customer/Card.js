@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
+export default function Card({ item }) {
+  console.log("rendering Card page");
 
-export default function Card(props) {
+  const [cardItems, setCardItems] = useState([]);
 
-    const [products, setProducts] = useState([])
+  useEffect(() => {
+    console.log(`${cardItems}`);
+  }, [cardItems]);
 
-    const clicked = () => {
-        products.push(props.id)
-    }
-
-    return (
-        <div>
-            <button onClick={clicked}>Add to card</button>
-        </div>
-    )
+  return (
+    <div>
+      <button>Add to card</button>
+    </div>
+  );
 }

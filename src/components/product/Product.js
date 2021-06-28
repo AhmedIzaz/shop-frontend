@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Card from '../customer/Card.js'
+import Card from "../customer/Card.js";
 export default function Product() {
+  console.log("rendering Product page");
+
   const [product, setProduct] = useState({});
   const { product_id } = useParams();
 

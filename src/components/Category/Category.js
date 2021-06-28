@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../assets/css/categoryCss/category.css";
 export default function Category() {
+  console.log("rendering category page");
+
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -20,8 +22,7 @@ export default function Category() {
         {categories.map((category, index) => {
           const link = `/categories/category/${category.id}`;
           return (
-
-            <Link to={link}>
+            <Link key={index} to={link}>
               <li className="product-category">
                 <h5>
                   ({index + 1}) {category.product_category_name}
@@ -29,7 +30,6 @@ export default function Category() {
                 <p>{category.description}</p>
               </li>
             </Link>
-
           );
         })}
       </ul>

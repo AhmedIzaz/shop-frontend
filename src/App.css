@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #f7f7f7;
 }
 
 div#navigation {
@@ -52,17 +53,18 @@ div#navigation .nav-link {
 .grid-item4 {
   grid-column: 2/3;
   grid-row: 3/5;
+  background: #ffffff;
 }
 
 .grid-item5 {
   grid-column: 2/3;
   grid-row: 5/7;
+  background: #ffffff;
 }
 
 #home-product-categories {
   padding-top: 20px;
   margin: auto;
-  background-color: rgb(238, 238, 238);
 }
 
 #home-product-categories ul {
@@ -71,7 +73,7 @@ div#navigation .nav-link {
   flex-direction: row;
   justify-content: center;
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: scroll;
   list-style-type: none;
 }
 
@@ -93,15 +95,13 @@ div#navigation .nav-link {
   padding-top: 10px;
   display: flex;
   flex-direction: row;
-  align-content: center;
-  justify-content: space-around;
+
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: scroll;
   list-style-type: none;
 }
 
 #home-products ul li {
-  min-width: 150px;
   padding: 20px;
 }
 
@@ -117,7 +117,7 @@ div#navigation .nav-link {
 }
 
 #slideshow {
-  margin-top: 10px;
+  margin: 1rem;
   height: 20em;
   position: relative;
   overflow: hidden;
@@ -158,8 +158,14 @@ div#navigation .nav-link {
 }
 
 .slideshow-item img {
-  width: 60%;
+  width: 50%;
   margin: auto;
+}
+
+.slideshow-item {
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem 0rem 1rem 0rem;
 }
 
 .footer {

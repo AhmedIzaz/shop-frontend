@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export default function Dashboard() {
+  console.log("rendering Dashboard page");
+
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -11,6 +13,8 @@ export default function Dashboard() {
       setCategories(dataPacket.data.product_category);
     });
   }, []);
+
+  console.log("before return");
 
   return (
     <div id="home">
@@ -64,7 +68,7 @@ export default function Dashboard() {
           {categories.map((category, index) => {
             const category_link = `/categories/category/${category.id}`;
             return (
-              <Link to={category_link}>
+              <Link key={index} to={category_link}>
                 <li className="home-product-category">
                   <h5>
                     ({index + 1}) {category.product_category_name}
@@ -80,13 +84,13 @@ export default function Dashboard() {
       <div className="grid-item grid-item5" id="home-products">
         <h3>Products</h3>
         <ul>
-          {products.map((product) => {
+          {products.map((product, index) => {
             const product_link = `/products/product/${product.id}`;
             return (
-              <Link to={product_link}>
+              <Link key={index} to={product_link}>
                 <li className="home-product">
                   <h4>{product.product_name}</h4>
-                  <small>{product.description}</small>
+                  <small>{product.description.substr(0, 20) + "..."}</small>
                 </li>
               </Link>
             );
