@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export default function Dashboard() {
-  console.log("rendering Dashboard page");
-
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -13,8 +11,6 @@ export default function Dashboard() {
       setCategories(dataPacket.data.product_category);
     });
   }, []);
-
-  console.log("before return");
 
   return (
     <div id="home">
@@ -34,6 +30,9 @@ export default function Dashboard() {
       </div>
 
       <div className="grid-item grid-item2">
+        <h1 style={{ backgroundColor: "black", color: "white" }}>
+          The Project is under development! Will complete soon!
+        </h1>
         <div id="slideshow">
           <div className="slideshow-item item1">
             <img src="https://blog.corp-site.envato.com/cdn-cgi/image/width=1200,quality=95,format=auto/uploads/2020/07/eCommerce-Trends-2020.png" />
