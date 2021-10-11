@@ -1,28 +1,28 @@
 import { Grid } from "@material-ui/core";
-import React, { Component } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import DemoData from "../../DemoData";
 import Product from "./Product/Product";
 import Styles from "./styles";
 
 export default function Products() {
   const classes = Styles();
-  const products = [
-    {
-      id: 1,
-      product_name: "Coca Cola",
-      picture:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/1200px-15-09-26-RalfR-WLC-0098.jpg",
-      description: "Worlds best soft drinks",
-      price: "100 taka",
-    },
-    {
-      id: 2,
-      product_name: "Pepsi",
-      picture:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pepsi_logo_2014.svg/1200px-Pepsi_logo_2014.svg.png",
-      description: "Worlds best soft drinks",
-      price: "100 taka",
-    },
-  ];
+  const [products, setProducts] = useState(DemoData);
+
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/product/products"
+      );
+      setProducts(response.data);
+    } catch (e) {
+      console.log(
+        e.message,
+        "or maybe you didn't connected to backend server, please start backend server!"
+      );
+    }
+  });
+
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />

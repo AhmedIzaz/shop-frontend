@@ -21,7 +21,7 @@ export default function Product({ product }) {
       />
 
       <CardContent>
-        <div className={classes.CardContent}>
+        <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
             {product.product_name}
           </Typography>
