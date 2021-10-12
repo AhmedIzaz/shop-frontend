@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,9 +11,23 @@ import {
 import { ShoppingCart } from "@material-ui/icons";
 import ShopLogo from "../Assets/shop_logo.jpg";
 import useStyles from "./styles";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+// ==================
+// ===================
+// ==================
+// ===================
+
+export default function Navbar({ cart }) {
+  const [cartItemNumber, setCartItemNumber] = useState(null);
   const classes = useStyles();
+
+  useEffect(async () => {
+    let number = 0;
+    cart.map((product) => (number = number + 1));
+    setCartItemNumber(number);
+  }, [cart]);
+
   return (
     <React.Fragment>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
@@ -27,10 +41,18 @@ export default function Navbar() {
             />
             My Shop
           </Typography>
+          <Typography variant="h7">
+            <div className={classes.links}>
+              <div>Home</div>
+              <div>Categories</div>
+              <div>Contact</div>
+            </div>
+          </Typography>
+
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={2} color="secondary">
+              <Badge badgeContent={cartItemNumber} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

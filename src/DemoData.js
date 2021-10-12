@@ -16,7 +16,7 @@ export default [
     price: "100 taka",
   },
   {
-    id: 1,
+    id: 3,
     product_name: "Coca Cola",
     picture:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/1200px-15-09-26-RalfR-WLC-0098.jpg",
@@ -24,7 +24,7 @@ export default [
     price: "100 taka",
   },
   {
-    id: 2,
+    id: 4,
     product_name: "Pepsi",
     picture:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pepsi_logo_2014.svg/1200px-Pepsi_logo_2014.svg.png",
@@ -32,7 +32,7 @@ export default [
     price: "100 taka",
   },
   {
-    id: 1,
+    id: 5,
     product_name: "Coca Cola",
     picture:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/1200px-15-09-26-RalfR-WLC-0098.jpg",
@@ -40,7 +40,7 @@ export default [
     price: "100 taka",
   },
   {
-    id: 2,
+    id: 6,
     product_name: "Pepsi",
     picture:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Pepsi_logo_2014.svg/1200px-Pepsi_logo_2014.svg.png",

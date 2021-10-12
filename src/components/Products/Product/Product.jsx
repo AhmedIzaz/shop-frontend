@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 
-export default function Product({ product }) {
+export default function Product({ product, addToCardHandler }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -25,15 +25,18 @@ export default function Product({ product }) {
           <Typography variant="h5" gutterBottom>
             {product.product_name}
           </Typography>
-          <Typography variant="h5">{product.price}</Typography>
+          <Typography variant="h5">৳ {product.price}</Typography>
         </div>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body3" color="textSecondary">
           {product.description}
         </Typography>
       </CardContent>
 
       <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="add to cart">
+        <IconButton
+          aria-label="add to cart"
+          onClick={() => addToCardHandler(product.id)}
+        >
           <AddShoppingCart />
         </IconButton>
       </CardActions>

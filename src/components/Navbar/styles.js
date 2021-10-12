@@ -65,4 +65,11 @@ export default makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  links: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    gap: "10vw",
+  },
 }));
