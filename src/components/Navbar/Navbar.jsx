@@ -18,15 +18,8 @@ import { Link } from "react-router-dom";
 // ==================
 // ===================
 
-export default function Navbar({ cart }) {
-  const [cartItemNumber, setCartItemNumber] = useState(null);
+export default function Navbar({ cartLength }) {
   const classes = useStyles();
-
-  useEffect(async () => {
-    let number = 0;
-    cart.map((product) => (number = number + 1));
-    setCartItemNumber(number);
-  }, [cart]);
 
   return (
     <React.Fragment>
@@ -51,8 +44,8 @@ export default function Navbar({ cart }) {
 
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-label="Show cart items" color="inherit">
-              <Badge badgeContent={cartItemNumber} color="secondary">
+            <IconButton aria-label="Show cartLength items" color="inherit">
+              <Badge badgeContent={cartLength} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
