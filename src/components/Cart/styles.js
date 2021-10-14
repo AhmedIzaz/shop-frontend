@@ -32,6 +32,7 @@ export default makeStyles((theme) => ({
   cardContent: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   cartActions: {
     justifyContent: "space-between",

@@ -14,8 +14,8 @@ function CartItem({ product }) {
     <Card>
       <CardMedia image={product.picture} className={classes.media} />
       <CardContent className={classes.cardContent}>
-        <Typography variant="h4">{product.product_name}</Typography>
-        <Typography variant="h5">{product.price}</Typography>
+        <Typography variant="h5">{product.product_name}</Typography>
+        <Typography variant="h6">{product.price}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>
@@ -27,7 +27,7 @@ function CartItem({ product }) {
             +
           </Button>
         </div>
-        <Button type="button" variant="outlined" color="secondary">
+        <Button size="small" type="button" variant="outlined" color="secondary">
           Remove
         </Button>
       </CardActions>
