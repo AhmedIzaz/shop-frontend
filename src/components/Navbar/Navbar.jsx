@@ -11,7 +11,7 @@ import {
 import { ShoppingCart } from "@material-ui/icons";
 import ShopLogo from "../Assets/shop_logo.jpg";
 import useStyles from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // ==================
 // ===================
@@ -20,19 +20,28 @@ import { Link } from "react-router-dom";
 
 export default function Navbar({ cartLength }) {
   const classes = useStyles();
+  const location = useLocation();
 
   return (
     <React.Fragment>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.title}>
-            <img
-              src={ShopLogo}
-              height="25px"
-              alt="My Shop"
-              className={classes.image}
-            />
-            My Shop
+          <Typography
+            component={Link}
+            to="/"
+            variant="h6"
+            color="inherit"
+            className={classes.title}
+          >
+            <div>
+              <img
+                src={ShopLogo}
+                height="25px"
+                alt="My Shop"
+                className={classes.image}
+              />
+            </div>
+            <div>My Shop</div>
           </Typography>
           <Typography variant="h7">
             <div className={classes.links}>
@@ -43,13 +52,21 @@ export default function Navbar({ cartLength }) {
           </Typography>
 
           <div className={classes.grow} />
-          <div className={classes.button}>
-            <IconButton aria-label="Show cartLength items" color="inherit">
-              <Badge badgeContent={cartLength} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </div>
+
+          {location.pathname === "/" && (
+            <div className={classes.button}>
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show cartLength items"
+                color="inherit"
+              >
+                <Badge badgeContent={cartLength} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>

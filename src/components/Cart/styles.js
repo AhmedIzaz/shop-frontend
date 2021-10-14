@@ -35,6 +35,7 @@ export default makeStyles((theme) => ({
     alignItems: "center",
   },
   cartActions: {
+    display: "flex",
     justifyContent: "space-between",
   },
   buttons: {

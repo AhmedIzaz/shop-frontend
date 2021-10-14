@@ -2,7 +2,12 @@ import { Grid, Typography, Button } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import useStyles from "./styles";
-export default function FilledCart({ cart }) {
+export default function FilledCart({
+  cart,
+  updateQuantityOfCartItem,
+  removeFromCart,
+  deleteCart,
+}) {
   const classes = useStyles();
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -23,7 +28,11 @@ export default function FilledCart({ cart }) {
         {cart.map((product) => (
           <Grid item xs={12} sm={3} key={product.id}>
             <div>
-              <CartItem product={product} />
+              <CartItem
+                product={product}
+                updateQuantityOfCartItem={updateQuantityOfCartItem}
+                removeFromCart={removeFromCart}
+              />
             </div>
           </Grid>
         ))}
@@ -39,6 +48,7 @@ export default function FilledCart({ cart }) {
             type="button"
             variant="contained"
             color="default"
+            onClick={() => deleteCart()}
           >
             Empty cart
           </Button>
