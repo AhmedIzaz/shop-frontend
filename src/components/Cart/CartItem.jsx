@@ -10,7 +10,7 @@ import React from "react";
 import useStyles from "./styles";
 function CartItem({ product, updateQuantityOfCartItem, removeFromCart }) {
   const classes = useStyles();
-
+  console.log("cart item");
   return (
     <Card>
       <CardMedia image={product.picture} className={classes.media} />
@@ -23,13 +23,9 @@ function CartItem({ product, updateQuantityOfCartItem, removeFromCart }) {
           <Button
             type="button"
             size="small"
-            onClick={() =>
-              updateQuantityOfCartItem(
-                product.id,
-                product.quantity,
-                "decreament"
-              )
-            }
+            onClick={() => {
+              updateQuantityOfCartItem(product.id, product.quantity - 1);
+            }}
           >
             -
           </Button>
@@ -38,11 +34,7 @@ function CartItem({ product, updateQuantityOfCartItem, removeFromCart }) {
             type="button"
             size="small"
             onClick={() =>
-              updateQuantityOfCartItem(
-                product.id,
-                product.quantity,
-                "increament"
-              )
+              updateQuantityOfCartItem(product.id, product.quantity + 1)
             }
           >
             +

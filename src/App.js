@@ -13,23 +13,19 @@ export default function App() {
   // ==================================================
   const addToCardHandler = async (id) => {
     const product = await DemoData.filter((product) => product.id == id);
-    setCart([...cart, ...product]);
+    cart.length === 0
+      ? setCart(product)
+      : setCart((cart) => [...cart, ...product]);
   };
   // =========================  for update quantity of  cart==========================
   // ===================================================
-  const updateQuantityOfCartItem = (id, currentQuantity, type) => {
-    try {
-      let indexOfProduct = cart.findIndex((item) => item.id === id);
-      let new_cart = cart;
-      let newCartItem =
-        type === "increament"
-          ? { ...new_cart[indexOfProduct], quantity: currentQuantity + 1 }
-          : { ...new_cart[indexOfProduct], quantity: currentQuantity - 1 };
-      new_cart[indexOfProduct] = newCartItem;
-      setCart(new_cart);
-    } catch (e) {
-      console.log(e.message);
-    }
+  // will work after connecting to server
+  const updateQuantityOfCartItem = (id, newQuantity) => {
+    let index = cart.findIndex((item) => item.id === id);
+    let newCart = cart;
+    let newItem = { ...newCart[index], quantity: newQuantity };
+    newCart[index] = newItem;
+    setCart(newCart);
   };
   // ===================== for remove a item from cart==============================
   // ===================================================
@@ -40,7 +36,7 @@ export default function App() {
   // =======================  to delete whole cart ============================
   // ===================================================
   const deleteCart = () => {
-    setCart({});
+    setCart([]);
   };
   // ===================================================
   // ===================================================

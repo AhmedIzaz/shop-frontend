@@ -17,8 +17,9 @@ export default function FilledCart({
   useEffect(() => {
     let price = 0;
     cart.map((product) => (price = price + parseInt(product.price)));
+
     setTotalPrice(price);
-  }, []);
+  }, [cart]);
 
   // =========================
   // =========================
@@ -39,7 +40,7 @@ export default function FilledCart({
       </Grid>
       <div className={classes.cardDetails}>
         <Typography variant="h4" gutterBottom>
-          Total:{totalPrice}
+          Total : {totalPrice}
         </Typography>
         <div>
           <Button
@@ -48,7 +49,7 @@ export default function FilledCart({
             type="button"
             variant="contained"
             color="default"
-            onClick={() => deleteCart()}
+            onClick={deleteCart}
           >
             Empty cart
           </Button>
