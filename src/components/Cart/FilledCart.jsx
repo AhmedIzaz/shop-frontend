@@ -27,7 +27,7 @@ export default function FilledCart({
     <>
       <Grid container spacing={3}>
         {cart.map((product) => (
-          <Grid item xs={12} sm={3} key={product.id}>
+          <Grid item xs={12} sm={4} key={product.id}>
             <div>
               <CartItem
                 product={product}

@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "./styles";
 
-export default function Product({ product, addToCardHandler }) {
+export default function Product({ product, addToCartHandler }) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -35,7 +35,7 @@ export default function Product({ product, addToCardHandler }) {
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton
           aria-label="add to cart"
-          onClick={() => addToCardHandler(product.id)}
+          onClick={() => addToCartHandler(product.id)}
         >
           <AddShoppingCart />
         </IconButton>

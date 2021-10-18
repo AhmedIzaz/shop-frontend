@@ -5,7 +5,7 @@ import React from "react";
 import Product from "./Product/Product";
 import Styles from "./styles";
 
-export default function Products({ products, addToCardHandler }) {
+export default function Products({ products, addToCartHandler }) {
   const classes = Styles();
   return (
     <main className={classes.content}>
@@ -14,7 +14,7 @@ export default function Products({ products, addToCardHandler }) {
         {products.map((product) => {
           return (
             <Grid item key={product.id} xs={12} md={4} lg={3} sm={6}>
-              <Product product={product} addToCardHandler={addToCardHandler} />
+              <Product product={product} addToCartHandler={addToCartHandler} />
             </Grid>
           );
         })}

@@ -5,61 +5,77 @@ import DemoData from "../src/DemoData";
 import axios from "axios";
 import Cart from "./components/Cart/Cart";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-export default function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+import { useStateValue } from "./State/StateProvider";
 
+export default function App() {
+  const [state, dispatch] = useStateValue();
   // ==================================================
   // ==================================================
-  const addToCardHandler = async (id) => {
-    const product = await DemoData.filter((product) => product.id == id);
-    cart.length === 0
-      ? setCart(product)
-      : setCart((cart) => [...cart, ...product]);
+  const addToCartHandler = async (id) => {
+    const product = state.products.filter((product) => product.id == id)[0];
+
+    await dispatch({
+      type: "ADD_PRODUCT_TO_CART",
+      item: {
+        product_id: product.id,
+        product_name: product.product_name,
+        quantity: 1,
+      },
+    });
+    console.log(state.cart, state.products);
   };
   // =========================  for update quantity of  cart==========================
   // ===================================================
   // will work after connecting to server
-  const updateQuantityOfCartItem = (id, newQuantity) => {
-    let index = cart.findIndex((item) => item.id === id);
-    let newCart = cart;
-    let newItem = { ...newCart[index], quantity: newQuantity };
-    newCart[index] = newItem;
-    setCart(newCart);
-  };
-  // ===================== for remove a item from cart==============================
+  // const updateQuantityOfCartItem = async (id, newQuantity) => {
+  //   let index = cart.findIndex((item) => item.id === id);
+  //   let newCart = cart;
+  //   let newItem = { ...newCart[index], quantity: newQuantity };
+  //   newCart[index] = newItem;
+  //   setCart(newCart);
+  // };
+  // // ===================== for remove a item from cart==============================
+  // // ===================================================
+  // const removeFromCart = (id) => {
+  //   const new_cart = cart.filter((item) => item.id !== id);
+  //   setCart(new_cart);
+  // };
+  // // =======================  to delete whole cart ============================
+  // // ===================================================
+  // const deleteCart = () => {
+  //   setCart([]);
+  // };
   // ===================================================
-  const removeFromCart = (id) => {
-    const new_cart = cart.filter((item) => item.id !== id);
-    setCart(new_cart);
-  };
-  // =======================  to delete whole cart ============================
   // ===================================================
-  const deleteCart = () => {
-    setCart([]);
-  };
-  // ===================================================
-  // ===================================================
-  useEffect(() => {
-    setProducts(DemoData);
-    setCart(DemoData);
+  useEffect(async () => {
+    await axios
+      .get("http://localhost:8000/product/products")
+      .then((productList) => {
+        dispatch({
+          type: "ADD_PRODUCTS_TO_STATE",
+          products: productList.data,
+        });
+      });
   }, []);
   // ===================================================
   // ===================================================
 
   return (
     <BrowserRouter>
-      <Navigationbar cartLength={cart.length} />
+      <Navigationbar cartLength={state.cart.length} />
       <Switch>
         <Route exact path="/">
-          <Products products={products} addToCardHandler={addToCardHandler} />
+          <Products
+            products={state.products}
+            addToCartHandler={addToCartHandler}
+          />
         </Route>
         <Route exact path="/cart">
           <Cart
-            cart={cart}
-            updateQuantityOfCartItem={updateQuantityOfCartItem}
-            removeFromCart={removeFromCart}
-            deleteCart={deleteCart}
+            cart={state.cart}
+            //   updateQuantityOfCartItem={updateQuantityOfCartItem}
+            //   removeFromCart={removeFromCart}
+            //   deleteCart={deleteCart}
           />
         </Route>
       </Switch>
