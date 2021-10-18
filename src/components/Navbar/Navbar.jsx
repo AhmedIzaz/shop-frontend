@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   AppBar,
   Toolbar,
   Typography,
-  Menu,
-  MenuItem,
   Badge,
   IconButton,
+  Avatar,
+  Button,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import ShopLogo from "../Assets/shop_logo.jpg";
 import useStyles from "./styles";
 import { Link, useLocation } from "react-router-dom";
+import { useStateValue } from "../../State/StateProvider";
 
 // ==================
 // ===================
@@ -21,11 +22,19 @@ import { Link, useLocation } from "react-router-dom";
 export default function Navbar({ cartLength }) {
   const classes = useStyles();
   const location = useLocation();
-
+  const [state, dispatch] = useStateValue();
   return (
     <React.Fragment>
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar>
+          <div>
+            <img
+              src={ShopLogo}
+              height="25px"
+              alt="My Shop"
+              className={classes.image}
+            />
+          </div>
           <Typography
             component={Link}
             to="/"
@@ -33,25 +42,31 @@ export default function Navbar({ cartLength }) {
             color="inherit"
             className={classes.title}
           >
-            <div>
-              <img
-                src={ShopLogo}
-                height="25px"
-                alt="My Shop"
-                className={classes.image}
-              />
-            </div>
-            <div>My Shop</div>
+            My Shop
           </Typography>
-          <Typography variant="h7">
+          <Typography variant="body2">
             <div className={classes.links}>
               <div>Home</div>
               <div>Categories</div>
               <div>Contact</div>
             </div>
           </Typography>
-
           <div className={classes.grow} />
+          {state.customer ? (
+            <div className={classes.profile}>
+              <Avatar />
+              <Typography>{state.customer.username}</Typography>
+            </div>
+          ) : (
+            <div className={classes.actions}>
+              <Button variant="contained" color="primary" size="small">
+                Register
+              </Button>
+              <Button variant="contained" color="inherit" size="small">
+                Login
+              </Button>
+            </div>
+          )}
 
           {location.pathname === "/" && (
             <div className={classes.button}>

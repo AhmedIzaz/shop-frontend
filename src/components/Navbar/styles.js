@@ -49,9 +49,6 @@ export default makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    alignItems: "center",
-    display: "flex",
-
     textDecoration: "none",
   },
   image: {
@@ -72,5 +69,12 @@ export default makeStyles((theme) => ({
     justifyContent: "space-around",
     alignItems: "center",
     gap: "10vw",
+  },
+  actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    gap: "2vw",
   },
 }));

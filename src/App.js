@@ -20,6 +20,8 @@ export default function App() {
         product_id: product.id,
         product_name: product.product_name,
         quantity: 1,
+        picture: product.picture,
+        price: product.price,
       },
     });
     console.log(state.cart, state.products);

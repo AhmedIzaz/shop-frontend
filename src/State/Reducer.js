@@ -1,4 +1,5 @@
 export const InitialState = {
+  customer: null,
   products: [],
   cart: [],
 };
