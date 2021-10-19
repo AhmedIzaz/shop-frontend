@@ -6,6 +6,8 @@ import axios from "axios";
 import Cart from "./components/Cart/Cart";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useStateValue } from "./State/StateProvider";
+import Login from "./components/Authentications/Login/Login";
+import Register from "./components/Authentications/Register/Register";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -49,22 +51,23 @@ export default function App() {
   // };
   // ===================================================
   // ===================================================
-  useEffect(async () => {
-    await axios
-      .get("http://localhost:8000/product/products")
-      .then((productList) => {
-        dispatch({
-          type: "ADD_PRODUCTS_TO_STATE",
-          products: productList.data,
-        });
-      });
-  }, []);
+  // useEffect(async () => {
+  //   await axios
+  //     .get("http://localhost:8000/product/products")
+  //     .then((productList) => {
+  //       dispatch({
+  //         type: "ADD_PRODUCTS_TO_STATE",
+  //         products: productList.data,
+  //       });
+  //     });
+  // }, []);
   // ===================================================
   // ===================================================
 
   return (
     <BrowserRouter>
       <Navigationbar cartLength={state.cart.length} />
+
       <Switch>
         <Route exact path="/">
           <Products
@@ -80,6 +83,8 @@ export default function App() {
             //   deleteCart={deleteCart}
           />
         </Route>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
       </Switch>
     </BrowserRouter>
   );

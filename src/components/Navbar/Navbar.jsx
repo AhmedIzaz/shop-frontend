@@ -59,12 +59,28 @@ export default function Navbar({ cartLength }) {
             </div>
           ) : (
             <div className={classes.actions}>
-              <Button variant="contained" color="primary" size="small">
-                Register
-              </Button>
-              <Button variant="contained" color="inherit" size="small">
-                Login
-              </Button>
+              {location.pathname !== "/register" && (
+                <Button
+                  component={Link}
+                  to="/register"
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                >
+                  Register
+                </Button>
+              )}
+              {location.pathname !== "/login" && (
+                <Button
+                  component={Link}
+                  to="/login"
+                  variant="contained"
+                  color="inherit"
+                  size="small"
+                >
+                  Login
+                </Button>
+              )}
             </div>
           )}
 

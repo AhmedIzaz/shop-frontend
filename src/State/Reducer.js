@@ -16,6 +16,11 @@ const Reducer = (state, action) => {
         ...state,
         products: action.products,
       };
+    case "ADD_CUSTOMER_TO_STATE":
+      return {
+        ...state,
+        customer: action.customer,
+      };
     default:
       return state;
   }
