@@ -4,13 +4,17 @@ import useStyles from "./styles";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 const schema = Yup.object({
   username: Yup.string().required(),
-  password: Yup.string().min(8).max(32).required(),
-  confirmPassword: Yup.string().oneOf([Yup.ref("password"), null]),
   email: Yup.string().email().required(),
+  password: Yup.string().min(8).max(32).required(),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null])
+    .required(),
+  contact_number: Yup.string().required(),
 });
 
 function Register() {
@@ -22,7 +26,22 @@ function Register() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const history = useHistory();
+  const onSubmit = ({ username, email, password, contact_number }) => {
+    axios
+      .post("http://localhost:8000/customer/customer-signup", {
+        username,
+        email,
+        password,
+        contact_number,
+      })
+      .then(async (response) => {
+        !response.data.error
+          ? history.push("/login")
+          : alert(response.data.error);
+      });
+  };
+
   return (
     <main style={{ backgroundColor: "#f9f9f9" }}>
       <div className={classes.toolbar} />
@@ -101,6 +120,23 @@ function Register() {
             </Typography>
             <br />
 
+            <label for="contactNumber">
+              <Typography variant="subtitle1">Contact Number</Typography>
+            </label>
+
+            <Controller
+              name="contact_number"
+              control={control}
+              render={({ field }) => (
+                <TextField fullWidth variant="outlined" {...field} />
+              )}
+            />
+
+            <Typography variant="body2" color="secondary">
+              {errors.contact_number?.message}
+            </Typography>
+            <br />
+
             <div className={classes.formFooter}>
               <Button type="submit" variant="contained" color="primary">
                 Register
@@ -112,7 +148,7 @@ function Register() {
                 color="textSecondary"
                 style={{ textDecoration: "none" }}
               >
-                All ready have an account?
+                Already have an account?
               </Typography>
             </div>
           </form>

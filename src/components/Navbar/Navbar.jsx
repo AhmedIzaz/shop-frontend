@@ -8,8 +8,8 @@ import {
   Avatar,
   Button,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
-import ShopLogo from "../Assets/shop_logo.jpg";
+import { ShoppingCart, ShopSharp } from "@material-ui/icons";
+
 import useStyles from "./styles";
 import { Link, useLocation } from "react-router-dom";
 import { useStateValue } from "../../State/StateProvider";
@@ -28,12 +28,9 @@ export default function Navbar({ cartLength }) {
       <AppBar color="inherit" position="fixed" className={classes.appBar}>
         <Toolbar>
           <div>
-            <img
-              src={ShopLogo}
-              height="25px"
-              alt="My Shop"
-              className={classes.image}
-            />
+            <IconButton component={Link} to="/">
+              <ShopSharp />
+            </IconButton>
           </div>
           <Typography
             component={Link}
