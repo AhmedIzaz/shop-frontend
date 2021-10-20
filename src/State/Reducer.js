@@ -19,7 +19,12 @@ const Reducer = (state, action) => {
     case "ADD_CUSTOMER_TO_STATE":
       return {
         ...state,
-        customer: action.customer,
+        customer: [...state.customer, { ...action.customer }],
+      };
+    case "REMOVE_CUSTOMER_FROM_STATE":
+      return {
+        ...state,
+        customer: state.customer.filter((obj) => obj.id !== action.customer.id),
       };
     default:
       return state;

@@ -41,13 +41,16 @@ export default function Navbar({ cartLength }) {
           >
             My Shop
           </Typography>
-          <Typography variant="body2">
-            <div className={classes.links}>
-              <div>Home</div>
-              <div>Categories</div>
-              <div>Contact</div>
-            </div>
-          </Typography>
+
+          <div>
+            <Typography variant="body2">
+              <div className={classes.links}>
+                <div>Home</div>
+                <div>Categories</div>
+                <div>Contact</div>
+              </div>
+            </Typography>
+          </div>
           <div className={classes.grow} />
           {state.customer ? (
             <div className={classes.profile}>

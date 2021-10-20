@@ -47,6 +47,13 @@ function Register() {
       <div className={classes.toolbar} />
       <div className={classes.cardWrapper}>
         <Card variant="elevation" className={classes.formWrapper}>
+          <center>
+            <Typography variant="h5" color="primary">
+              Register as a Customer
+            </Typography>
+          </center>
+          <br />
+          <br />
           <form onSubmit={handleSubmit(onSubmit)}>
             <label for="username">
               <Typography variant="subtitle1">Username</Typography>
@@ -56,12 +63,13 @@ function Register() {
               name="username"
               control={control}
               render={({ field }) => (
-                <TextField fullWidth variant="outlined" {...field} />
+                <TextField fullWidth variant="standard" {...field} />
               )}
             />
             <Typography variant="body2" color="secondary">
               {errors.username?.message}
             </Typography>
+            <br />
 
             <label for="email">
               <Typography variant="subtitle1">Email</Typography>
@@ -71,12 +79,13 @@ function Register() {
               name="email"
               control={control}
               render={({ field }) => (
-                <TextField fullWidth variant="outlined" {...field} />
+                <TextField fullWidth variant="standard" {...field} />
               )}
             />
             <Typography variant="body2" color="secondary">
               {errors.email?.message}
             </Typography>
+            <br />
 
             <label for="password">
               <Typography variant="subtitle1">Password</Typography>
@@ -89,7 +98,7 @@ function Register() {
                 <TextField
                   type="password"
                   fullWidth
-                  variant="outlined"
+                  variant="standard"
                   {...field}
                 />
               )}
@@ -97,6 +106,7 @@ function Register() {
             <Typography variant="body2" color="secondary">
               {errors.password?.message}
             </Typography>
+            <br />
 
             <label for="confirmPassword">
               <Typography variant="subtitle1">Confirm Password</Typography>
@@ -109,7 +119,7 @@ function Register() {
                 <TextField
                   type="password"
                   fullWidth
-                  variant="outlined"
+                  variant="standard"
                   {...field}
                 />
               )}
@@ -128,7 +138,7 @@ function Register() {
               name="contact_number"
               control={control}
               render={({ field }) => (
-                <TextField fullWidth variant="outlined" {...field} />
+                <TextField fullWidth variant="standard" {...field} />
               )}
             />
 

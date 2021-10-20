@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "./styles";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Card, TextField, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const schema = Yup.object({
   password: Yup.string().min(8).max(32).required(),
@@ -12,6 +13,8 @@ const schema = Yup.object({
 });
 function Login() {
   const classes = useStyles();
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
   const {
     handleSubmit,
     formState: { errors },
@@ -19,12 +22,35 @@ function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = ({ email, password }) => {
+    axios
+      .post("http://localhost:8000/customer/customer-login", {
+        email,
+        password,
+      })
+      .then((response) => {
+        if (response.data.error) {
+          return response.data.error.email
+            ? setEmailError(response.data.error.email)
+            : setPasswordError(response.data.error.password);
+        }
+        setEmailError(null);
+        setPasswordError(null);
+        console.log(response.data.customer);
+      });
+  };
   return (
     <main style={{ backgroundColor: "#f9f9f9" }}>
       <div className={classes.toolbar} />
       <div className={classes.cardWrapper}>
         <Card variant="elevation" className={classes.formWrapper}>
+          <center>
+            <Typography variant="h5" color="primary">
+              Login Form
+            </Typography>
+          </center>
+          <br />
+          <br />
           <form onSubmit={handleSubmit(onSubmit)}>
             <label for="email">
               <Typography variant="subtitle1">Email</Typography>
@@ -34,12 +60,20 @@ function Login() {
               name="email"
               control={control}
               render={({ field }) => (
-                <TextField fullWidth variant="outlined" {...field} />
+                <TextField
+                  type="email"
+                  fullWidth
+                  variant="standard"
+                  {...field}
+                />
               )}
             />
             <Typography variant="body2" color="secondary">
               {errors.email?.message}
+              {emailError ? emailError : null}
             </Typography>
+            <br />
+
             <label for="password">
               <Typography variant="subtitle1">Password</Typography>
             </label>
@@ -49,11 +83,17 @@ function Login() {
               name="password"
               control={control}
               render={({ field }) => (
-                <TextField fullWidth variant="outlined" {...field} />
+                <TextField
+                  type="password"
+                  fullWidth
+                  variant="standard"
+                  {...field}
+                />
               )}
             />
             <Typography variant="body2" color="secondary">
               {errors.password?.message}
+              {passwordError ? passwordError : null}
             </Typography>
             <br />
             <div className={classes.formFooter}>
