@@ -56,6 +56,15 @@ export default function Navbar({ cartLength }) {
             <div className={classes.profile}>
               <Avatar />
               <Typography>{state.customer.username}</Typography>
+              <Button
+                component={Link}
+                to="/logout"
+                variant="contained"
+                color="secondary"
+                size="small"
+              >
+                Logout
+              </Button>
             </div>
           ) : (
             <div className={classes.actions}>

@@ -4,14 +4,16 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Card, TextField, Button, Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
+import { useStateValue } from "../../../State/StateProvider";
 const schema = Yup.object({
   password: Yup.string().min(8).max(32).required(),
   email: Yup.string().email().required(),
 });
 function Login() {
+  const [state, dispatch] = useStateValue();
+  const history = useHistory();
   const classes = useStyles();
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -36,7 +38,14 @@ function Login() {
         }
         setEmailError(null);
         setPasswordError(null);
-        console.log(response.data.customer);
+        if (response.data.customer.email == email) {
+          dispatch({
+            type: "ADD_CUSTOMER_TO_STATE",
+            customer: response.data.customer,
+          });
+          console.log(state.customer);
+          return history.push("/");
+        }
       });
   };
   return (

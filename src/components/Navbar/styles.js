@@ -77,4 +77,11 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     gap: "2vw",
   },
+  profile: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "1vw",
+  },
 }));

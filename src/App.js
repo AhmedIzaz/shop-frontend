@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Navigationbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
-import DemoData from "../src/DemoData";
-import axios from "axios";
+
 import Cart from "./components/Cart/Cart";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useStateValue } from "./State/StateProvider";
 import Login from "./components/Authentications/Login/Login";
 import Register from "./components/Authentications/Register/Register";
-
+import Logout from "./components/Authentications/Logout";
 export default function App() {
   const [state, dispatch] = useStateValue();
+
   // ==================================================
   // ==================================================
   const addToCartHandler = async (id) => {
@@ -83,8 +83,9 @@ export default function App() {
             //   deleteCart={deleteCart}
           />
         </Route>
-        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/logout" component={Logout} />
       </Switch>
     </BrowserRouter>
   );
