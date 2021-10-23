@@ -8,10 +8,10 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import useStyles from "./styles";
-function CartItem({ product, updateQuantityOfCartItem, removeFromCart }) {
+import useMethod from "../../Methods/useMethod";
+function CartItem({ product, updateQuantityOfCartItem }) {
   const classes = useStyles();
-
-  console.log("cart item");
+  const { removeFromCart } = useMethod();
   return (
     <Card>
       <CardMedia image={product.picture} className={classes.media} />

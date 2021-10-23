@@ -2,11 +2,14 @@ import { Container, Grid, Typography } from "@material-ui/core";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../../State/StateProvider";
 import FilledCart from "./FilledCart";
 import useStyles from "./styles";
-function Cart({ cart, updateQuantityOfCartItem, removeFromCart, deleteCart }) {
+function Cart({ updateQuantityOfCartItem }) {
+  const [state, dispatch] = useStateValue();
   const classes = useStyles();
-  const cartIsEmpty = !cart.length;
+  const cartIsEmpty = !state.cart.length;
+
   //   =============================
   // ===============================
   const EmptyCart = () => {
@@ -33,12 +36,7 @@ function Cart({ cart, updateQuantityOfCartItem, removeFromCart, deleteCart }) {
       {cartIsEmpty ? (
         <EmptyCart />
       ) : (
-        <FilledCart
-          cart={cart}
-          updateQuantityOfCartItem={updateQuantityOfCartItem}
-          removeFromCart={removeFromCart}
-          deleteCart={deleteCart}
-        />
+        <FilledCart updateQuantityOfCartItem={updateQuantityOfCartItem} />
       )}
     </Container>
   );

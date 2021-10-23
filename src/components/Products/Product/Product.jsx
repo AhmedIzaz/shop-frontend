@@ -8,12 +8,20 @@ import {
   CardMedia,
   CardContent,
 } from "@material-ui/core";
-import useStyles from "./styles";
 
-export default function Product({ product, addToCartHandler }) {
+import useStyles from "./styles";
+import useMethod from "../../../Methods/useMethod";
+import { Link } from "react-router-dom";
+
+export default function Product({ product }) {
   const classes = useStyles();
+  const { addToCartHandler } = useMethod();
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      component={Link}
+      to={`/product-description/${product.id}`}
+    >
       <CardMedia
         className={classes.media}
         image={product.picture}

@@ -1,33 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigationbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
-
+import axios from "axios";
 import Cart from "./components/Cart/Cart";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import { useStateValue } from "./State/StateProvider";
 import Login from "./components/Authentications/Login/Login";
 import Register from "./components/Authentications/Register/Register";
 import Logout from "./components/Authentications/Logout";
+import ProductDescription from "./components/Products/Product/ProductDescription";
+
 export default function App() {
   const [state, dispatch] = useStateValue();
 
   // ==================================================
   // ==================================================
-  const addToCartHandler = async (id) => {
-    const product = state.products.filter((product) => product.id == id)[0];
 
-    await dispatch({
-      type: "ADD_PRODUCT_TO_CART",
-      item: {
-        product_id: product.id,
-        product_name: product.product_name,
-        quantity: 1,
-        picture: product.picture,
-        price: product.price,
-      },
-    });
-    console.log(state.cart, state.products);
-  };
   // =========================  for update quantity of  cart==========================
   // ===================================================
   // will work after connecting to server
@@ -40,27 +28,23 @@ export default function App() {
   // };
   // // ===================== for remove a item from cart==============================
   // // ===================================================
-  // const removeFromCart = (id) => {
-  //   const new_cart = cart.filter((item) => item.id !== id);
-  //   setCart(new_cart);
+  //
   // };
   // // =======================  to delete whole cart ============================
   // // ===================================================
-  // const deleteCart = () => {
-  //   setCart([]);
-  // };
+
   // ===================================================
   // ===================================================
-  // useEffect(async () => {
-  //   await axios
-  //     .get("http://localhost:8000/product/products")
-  //     .then((productList) => {
-  //       dispatch({
-  //         type: "ADD_PRODUCTS_TO_STATE",
-  //         products: productList.data,
-  //       });
-  //     });
-  // }, []);
+  useEffect(async () => {
+    await axios
+      .get("http://localhost:8000/product/products")
+      .then((productList) => {
+        dispatch({
+          type: "ADD_PRODUCTS_TO_STATE",
+          products: productList.data,
+        });
+      });
+  }, []);
   // ===================================================
   // ===================================================
 
@@ -69,20 +53,14 @@ export default function App() {
       <Navigationbar cartLength={state.cart.length} />
 
       <Switch>
-        <Route exact path="/">
-          <Products
-            products={state.products}
-            addToCartHandler={addToCartHandler}
-          />
-        </Route>
-        <Route exact path="/cart">
-          <Cart
-            cart={state.cart}
-            //   updateQuantityOfCartItem={updateQuantityOfCartItem}
-            //   removeFromCart={removeFromCart}
-            //   deleteCart={deleteCart}
-          />
-        </Route>
+        <Route exact path="/" component={Products} />
+        <Route
+          exact
+          path="/product-description/:product_id"
+          render={(props) => <ProductDescription />}
+        />
+
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />

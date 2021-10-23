@@ -12,6 +12,7 @@ const schema = Yup.object({
   email: Yup.string().email().required(),
 });
 function Login() {
+  axios.defaults.withCredentials = true;
   const [state, dispatch] = useStateValue();
   const history = useHistory();
   const classes = useStyles();
@@ -43,7 +44,7 @@ function Login() {
             type: "ADD_CUSTOMER_TO_STATE",
             customer: response.data.customer,
           });
-          console.log(state.customer);
+
           return history.push("/");
         }
       });
