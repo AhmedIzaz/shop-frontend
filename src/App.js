@@ -13,9 +13,6 @@ import ProductDescription from "./components/Products/Product/ProductDescription
 export default function App() {
   const [state, dispatch] = useStateValue();
 
-  // ==================================================
-  // ==================================================
-
   // =========================  for update quantity of  cart==========================
   // ===================================================
   // will work after connecting to server
@@ -26,15 +23,7 @@ export default function App() {
   //   newCart[index] = newItem;
   //   setCart(newCart);
   // };
-  // // ===================== for remove a item from cart==============================
-  // // ===================================================
-  //
-  // };
-  // // =======================  to delete whole cart ============================
-  // // ===================================================
 
-  // ===================================================
-  // ===================================================
   useEffect(async () => {
     await axios
       .get("http://localhost:8000/product/products")
@@ -45,8 +34,6 @@ export default function App() {
         });
       });
   }, []);
-  // ===================================================
-  // ===================================================
 
   return (
     <BrowserRouter>
