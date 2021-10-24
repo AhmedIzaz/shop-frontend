@@ -17,4 +17,23 @@ export default makeStyles((theme) => ({
     height: 0,
     paddingTop: "56.25%",
   },
+  contentLink: {
+    textDecoration: "none",
+    color: "black",
+  },
+  descWrapper: {
+    display: "flex",
+    flexDirection: "row",
+
+    alignItems: "center",
+  },
+  info: {
+    width: "50%",
+  },
+  descImageWrapper: {
+    width: "100%",
+  },
+  descImage: {
+    width: "50%",
+  },
 }));

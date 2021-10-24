@@ -17,28 +17,34 @@ export default function Product({ product }) {
   const classes = useStyles();
   const { addToCartHandler } = useMethod();
   return (
-    <Card
-      className={classes.root}
-      component={Link}
-      to={`/product-description/${product.id}`}
-    >
-      <CardMedia
-        className={classes.media}
-        image={product.picture}
-        title={product.product_name}
-      />
+    <Card className={classes.root}>
+      <Link
+        className={classes.contentLink}
+        to={{
+          pathname: `/product-description/`,
+          state: {
+            product: product,
+          },
+        }}
+      >
+        <CardMedia
+          className={classes.media}
+          image={product.picture}
+          title={product.product_name}
+        />
 
-      <CardContent>
-        <div className={classes.cardContent}>
-          <Typography variant="h5" gutterBottom>
-            {product.product_name}
+        <CardContent>
+          <div className={classes.cardContent}>
+            <Typography variant="h5" gutterBottom>
+              {product.product_name}
+            </Typography>
+            <Typography variant="h5">৳ {product.price}</Typography>
+          </div>
+          <Typography variant="body3" color="textSecondary">
+            {product.description}
           </Typography>
-          <Typography variant="h5">৳ {product.price}</Typography>
-        </div>
-        <Typography variant="body3" color="textSecondary">
-          {product.description}
-        </Typography>
-      </CardContent>
+        </CardContent>
+      </Link>
 
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton

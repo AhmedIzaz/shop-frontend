@@ -1,22 +1,28 @@
-import { Paper } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useStateValue } from "../../../State/StateProvider";
 import useStyles from "./styles";
+import { useLocation } from "react-router-dom";
 
 function ProductDescription() {
   const classes = useStyles();
-  const { product_id } = useParams();
-  const [state, dispatch] = useStateValue();
-  const product = state.products.filter(
-    (product) => product.id == product_id
-  )[0];
+  const { product } = useLocation().state;
+
   return (
     <main>
       <div className={classes.toolbar} />
-      <Paper variant="elevation">
-        <h3>{product.product_name}</h3>
-      </Paper>
+      <Grid container justify="center">
+        <Grid item xs={10} md={8} lg={6} sm={8}>
+          <div className={classes.descWrapper}>
+            <div className={classes.info}>
+              <Typography variant="h5">{product.product_name}</Typography>
+              <Typography variant="body2">{product.description}</Typography>
+            </div>
+            <div className={classes.descImageWrapper}>
+              <img className={classes.descImage} src={product.picture} />
+            </div>
+          </div>
+        </Grid>
+      </Grid>
     </main>
   );
 }

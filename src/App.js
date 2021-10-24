@@ -43,8 +43,8 @@ export default function App() {
         <Route exact path="/" component={Products} />
         <Route
           exact
-          path="/product-description/:product_id"
-          render={(props) => <ProductDescription />}
+          path="/product-description/"
+          component={ProductDescription}
         />
 
         <Route exact path="/cart" component={Cart} />
