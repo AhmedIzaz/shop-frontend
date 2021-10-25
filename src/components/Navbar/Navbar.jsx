@@ -45,9 +45,15 @@ export default function Navbar({ cartLength }) {
           <div>
             <Typography variant="body2">
               <div className={classes.links}>
-                <div>Home</div>
-                <div>Categories</div>
-                <div>Contact</div>
+                <Button component={Link} to="/">
+                  Home
+                </Button>
+
+                <Button component={Link} to="/categories">
+                  Categories
+                </Button>
+
+                <Button>Contact</Button>
               </div>
             </Typography>
           </div>

@@ -9,6 +9,7 @@ import Login from "./components/Authentications/Login/Login";
 import Register from "./components/Authentications/Register/Register";
 import Logout from "./components/Authentications/Logout";
 import ProductDescription from "./components/Products/Product/ProductDescription";
+import Categories from "./components/Categories/Categories";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -46,7 +47,7 @@ export default function App() {
           path="/product-description/"
           component={ProductDescription}
         />
-
+        <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
