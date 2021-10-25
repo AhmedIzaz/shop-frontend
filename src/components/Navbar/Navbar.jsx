@@ -53,7 +53,9 @@ export default function Navbar({ cartLength }) {
                   Categories
                 </Button>
 
-                <Button>Contact</Button>
+                <Button component={Link} to="/contact">
+                  Contact
+                </Button>
               </div>
             </Typography>
           </div>

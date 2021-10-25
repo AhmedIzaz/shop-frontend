@@ -10,6 +10,8 @@ import Register from "./components/Authentications/Register/Register";
 import Logout from "./components/Authentications/Logout";
 import ProductDescription from "./components/Products/Product/ProductDescription";
 import Categories from "./components/Categories/Categories";
+import CategoriesProduct from "./components/Categories/CategoriesProduct";
+import Contact from "./components/Contact/Contact";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -26,14 +28,26 @@ export default function App() {
   // };
 
   useEffect(async () => {
-    await axios
-      .get("http://localhost:8000/product/products")
-      .then((productList) => {
-        dispatch({
-          type: "ADD_PRODUCTS_TO_STATE",
-          products: productList.data,
+    try {
+      await axios
+        .get("http://localhost:8000/product/products")
+        .then((productList) => {
+          dispatch({
+            type: "ADD_PRODUCTS_TO_STATE",
+            products: productList.data,
+          });
         });
-      });
+      await axios
+        .get("http://localhost:8000/category/categories")
+        .then((categoryList) => {
+          dispatch({
+            type: "ADD_CATEGORIES_TO_STATE",
+            categories: categoryList.data.categories,
+          });
+        });
+    } catch (e) {
+      return alert(e.message);
+    }
   }, []);
 
   return (
@@ -48,10 +62,16 @@ export default function App() {
           component={ProductDescription}
         />
         <Route exact path="/categories" component={Categories} />
+        <Route
+          exact
+          path="/categories-product/:category_id"
+          component={CategoriesProduct}
+        />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
+        <Route exact path="/contact" component={Contact} />
       </Switch>
     </BrowserRouter>
   );

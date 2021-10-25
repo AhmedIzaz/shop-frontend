@@ -35,6 +35,14 @@ export default makeStyles((theme) => ({
     marginTop: "5%",
     position: "relative",
   },
+
+  description_table_wrapper: {
+    width: "100%",
+  },
+  description_table: {
+    width: "100%",
+  },
+
   description_action_wrapper: {
     marginBottom: "5%",
     width: "100%",
