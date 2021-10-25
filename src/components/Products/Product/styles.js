@@ -21,19 +21,36 @@ export default makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
   },
-  descWrapper: {
+
+  paper: {
     display: "flex",
     flexDirection: "row",
-
+    gap: "1%",
+  },
+  product_description_image: {
+    width: "50%",
+  },
+  description: {
+    width: "50%",
+    marginTop: "5%",
+    position: "relative",
+  },
+  description_action_wrapper: {
+    marginBottom: "5%",
+    width: "100%",
+    bottom: 0,
+    position: "absolute",
+  },
+  description_action_area: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
     alignItems: "center",
   },
-  info: {
-    width: "50%",
-  },
-  descImageWrapper: {
-    width: "100%",
-  },
-  descImage: {
-    width: "50%",
+  desc_actions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
 }));
