@@ -4,7 +4,7 @@ import useMethod from "../../Methods/useMethod";
 import { useStateValue } from "../../State/StateProvider";
 import CartItem from "./CartItem";
 import useStyles from "./styles";
-export default function FilledCart({ updateQuantityOfCartItem }) {
+export default function FilledCart() {
   const classes = useStyles();
   const [totalPrice, setTotalPrice] = useState(0);
   const [state, dispatch] = useStateValue();
@@ -15,7 +15,13 @@ export default function FilledCart({ updateQuantityOfCartItem }) {
 
   useEffect(() => {
     let price = 0;
-    state.cart.map((product) => (price = price + parseInt(product.price)));
+    state.customer.carts.map((product) =>
+      state.products.map((item) =>
+        item.id == product.product_id
+          ? (price = price + parseInt(item.price))
+          : null
+      )
+    );
 
     setTotalPrice(price);
   }, [state.cart]);
@@ -25,16 +31,17 @@ export default function FilledCart({ updateQuantityOfCartItem }) {
   return (
     <>
       <Grid container spacing={3}>
-        {state.cart.map((product) => (
-          <Grid item xs={12} sm={4} key={product.id}>
-            <div>
-              <CartItem
-                product={product}
-                updateQuantityOfCartItem={updateQuantityOfCartItem}
-              />
-            </div>
-          </Grid>
-        ))}
+        {state.customer.carts.map((product) =>
+          state.products.map((item) =>
+            item.id == product.product_id ? (
+              <Grid item xs={12} sm={4} key={product.product_id}>
+                <div>
+                  <CartItem product={item} />
+                </div>
+              </Grid>
+            ) : null
+          )
+        )}
       </Grid>
       <div className={classes.cardDetails}>
         <Typography variant="h4" gutterBottom>

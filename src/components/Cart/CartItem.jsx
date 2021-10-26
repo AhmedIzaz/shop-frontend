@@ -9,15 +9,15 @@ import {
 import React from "react";
 import useStyles from "./styles";
 import useMethod from "../../Methods/useMethod";
-function CartItem({ product, updateQuantityOfCartItem }) {
+function CartItem({ item }) {
   const classes = useStyles();
   const { removeFromCart } = useMethod();
   return (
     <Card>
-      <CardMedia image={product.picture} className={classes.media} />
+      <CardMedia image={item.picture} className={classes.media} />
       <CardContent className={classes.cardContent}>
-        <Typography variant="h5">{product.product_name}</Typography>
-        <Typography variant="h6">{product.price}</Typography>
+        <Typography variant="h5">{item.product_name}</Typography>
+        <Typography variant="h6">{item.price}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <div className={classes.buttons}>
@@ -25,13 +25,7 @@ function CartItem({ product, updateQuantityOfCartItem }) {
             -
           </Button>
           <Typography>1</Typography>
-          <Button
-            type="button"
-            size="small"
-            onClick={() =>
-              updateQuantityOfCartItem(product.id, product.quantity + 1)
-            }
-          >
+          <Button type="button" size="small" onClick={() => null}>
             +
           </Button>
         </div>
@@ -40,7 +34,7 @@ function CartItem({ product, updateQuantityOfCartItem }) {
           type="button"
           variant="outlined"
           color="secondary"
-          onClick={() => removeFromCart(product.id)}
+          onClick={() => removeFromCart(item.id)}
         >
           Remove
         </Button>

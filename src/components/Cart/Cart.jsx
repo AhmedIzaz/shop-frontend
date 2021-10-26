@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../../State/StateProvider";
 import FilledCart from "./FilledCart";
 import useStyles from "./styles";
-function Cart({ updateQuantityOfCartItem }) {
+function Cart() {
   const [state, dispatch] = useStateValue();
   const classes = useStyles();
-  const cartIsEmpty = !state.cart.length;
+  const cartIsEmpty = !state.customer.carts.length;
 
   //   =============================
   // ===============================
@@ -33,11 +33,7 @@ function Cart({ updateQuantityOfCartItem }) {
       </Typography>
       <div className={classes.toolbar} />
 
-      {cartIsEmpty ? (
-        <EmptyCart />
-      ) : (
-        <FilledCart updateQuantityOfCartItem={updateQuantityOfCartItem} />
-      )}
+      {cartIsEmpty ? <EmptyCart /> : <FilledCart />}
     </Container>
   );
 }

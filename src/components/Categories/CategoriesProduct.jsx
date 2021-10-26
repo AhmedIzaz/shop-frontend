@@ -28,6 +28,7 @@ function CategoriesProduct() {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
+
       {products.length > 0 ? (
         <Grid container justify="center" spacing={4}>
           {products.map((product) => {
@@ -75,7 +76,11 @@ function CategoriesProduct() {
             );
           })}
         </Grid>
-      ) : null}
+      ) : (
+        <Typography variant="h3" color="textSecondary">
+          There are no products in this category
+        </Typography>
+      )}
     </main>
   );
 }

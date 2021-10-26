@@ -16,17 +16,6 @@ import Contact from "./components/Contact/Contact";
 export default function App() {
   const [state, dispatch] = useStateValue();
 
-  // =========================  for update quantity of  cart==========================
-  // ===================================================
-  // will work after connecting to server
-  // const updateQuantityOfCartItem = async (id, newQuantity) => {
-  //   let index = cart.findIndex((item) => item.id === id);
-  //   let newCart = cart;
-  //   let newItem = { ...newCart[index], quantity: newQuantity };
-  //   newCart[index] = newItem;
-  //   setCart(newCart);
-  // };
-
   useEffect(async () => {
     try {
       await axios
@@ -52,7 +41,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navigationbar cartLength={state.cart.length} />
+      <Navigationbar
+        cartLength={state.customer.carts ? state.customer.carts.length : null}
+      />
 
       <Switch>
         <Route exact path="/" component={Products} />

@@ -31,7 +31,7 @@ function Login() {
         email,
         password,
       })
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.error) {
           return response.data.error.email
             ? setEmailError(response.data.error.email)
@@ -39,10 +39,16 @@ function Login() {
         }
         setEmailError(null);
         setPasswordError(null);
+
         if (response.data.customer.email == email) {
-          dispatch({
+          await dispatch({
             type: "ADD_CUSTOMER_TO_STATE",
             customer: response.data.customer,
+          });
+
+          await dispatch({
+            type: "ADD_CART_TO_CUSTOMER",
+            carts: response.data.carts,
           });
 
           return history.push("/");

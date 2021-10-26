@@ -13,6 +13,7 @@ function Categories() {
   return (
     <main>
       <div className={classes.toolbar} />
+
       <Grid container justify="center" spacing={4}>
         {state.categories.map((category) => (
           <Grid

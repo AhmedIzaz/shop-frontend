@@ -43,6 +43,12 @@ const Reducer = (state, action) => {
         customer: { ...action.customer },
       };
 
+    case "ADD_CART_TO_CUSTOMER":
+      return {
+        ...state,
+        customer: { ...state.customer, carts: action.carts },
+      };
+
     case "REMOVE_CUSTOMER_FROM_STATE":
       return {
         ...state,
