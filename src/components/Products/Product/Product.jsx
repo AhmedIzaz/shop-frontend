@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 export default function Product({ product }) {
   const classes = useStyles();
-  const { addToCartHandler } = useMethod();
+  const { addToCustomerCart } = useMethod();
   return (
     <Card className={classes.root}>
       <Link
@@ -49,7 +49,7 @@ export default function Product({ product }) {
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton
           aria-label="add to cart"
-          onClick={() => addToCartHandler(product.id)}
+          onClick={() => addToCustomerCart(product.id)}
         >
           <AddShoppingCart />
         </IconButton>

@@ -18,7 +18,7 @@ import useMethod from "../../../Methods/useMethod";
 function ProductDescription() {
   const classes = useStyles();
   const { product } = useLocation().state;
-  const { addToCartHandler } = useMethod();
+  const { addToCustomerCart } = useMethod();
   console.log(product);
   return (
     <main>
@@ -93,7 +93,7 @@ function ProductDescription() {
                     <Typography variant="body2">
                       Add to shopping cart:
                     </Typography>
-                    <IconButton onClick={() => addToCartHandler(product.id)}>
+                    <IconButton onClick={() => addToCustomerCart(product.id)}>
                       <ShoppingCart />
                     </IconButton>
                   </div>

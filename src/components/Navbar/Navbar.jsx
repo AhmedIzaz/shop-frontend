@@ -60,7 +60,7 @@ export default function Navbar({ cartLength }) {
             </Typography>
           </div>
           <div className={classes.grow} />
-          {state.customer ? (
+          {state.customer && location.pathname !== "/login" ? (
             <div className={classes.profile}>
               <Avatar />
               <Typography>{state.customer.username}</Typography>
@@ -101,7 +101,7 @@ export default function Navbar({ cartLength }) {
             </div>
           )}
 
-          {location.pathname === "/" && (
+          {location.pathname === "/" && state.customer ? (
             <div className={classes.button}>
               <IconButton
                 component={Link}
@@ -109,12 +109,17 @@ export default function Navbar({ cartLength }) {
                 aria-label="Show cartLength items"
                 color="inherit"
               >
-                <Badge badgeContent={cartLength} color="secondary">
+                <Badge
+                  badgeContent={
+                    state.customer ? state.customer.carts.length : null
+                  }
+                  color="secondary"
+                >
                   <ShoppingCart />
                 </Badge>
               </IconButton>
             </div>
-          )}
+          ) : null}
         </Toolbar>
       </AppBar>
     </React.Fragment>

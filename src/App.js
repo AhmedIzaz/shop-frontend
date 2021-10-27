@@ -41,9 +41,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navigationbar
-        cartLength={state.customer.carts ? state.customer.carts.length : null}
-      />
+      <Navigationbar />
 
       <Switch>
         <Route exact path="/" component={Products} />

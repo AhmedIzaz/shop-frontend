@@ -25,8 +25,8 @@ function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = ({ email, password }) => {
-    axios
+  const onSubmit = async ({ email, password }) => {
+    await axios
       .post("http://localhost:8000/customer/customer-login", {
         email,
         password,
@@ -42,12 +42,8 @@ function Login() {
 
         if (response.data.customer.email == email) {
           await dispatch({
-            type: "ADD_CUSTOMER_TO_STATE",
+            type: "ADD_CUSTOMER_AND_CARTS_TO_STATE",
             customer: response.data.customer,
-          });
-
-          await dispatch({
-            type: "ADD_CART_TO_CUSTOMER",
             carts: response.data.carts,
           });
 
