@@ -12,6 +12,7 @@ import ProductDescription from "./components/Products/Product/ProductDescription
 import Categories from "./components/Categories/Categories";
 import CategoriesProduct from "./components/Categories/CategoriesProduct";
 import Contact from "./components/Contact/Contact";
+import Checkout from "./components/Checkout/Checkout";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -57,6 +58,7 @@ export default function App() {
           component={CategoriesProduct}
         />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />

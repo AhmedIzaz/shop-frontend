@@ -1,5 +1,6 @@
 import { Grid, Typography, Button } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import useMethod from "../../Methods/useMethod";
 import { useStateValue } from "../../State/StateProvider";
 import CartItem from "./CartItem";
@@ -43,7 +44,10 @@ export default function FilledCart() {
           >
             Empty cart
           </Button>
+
           <Button
+            component={Link}
+            to="/checkout"
             className={classes.checkoutButton}
             size="medium"
             type="button"

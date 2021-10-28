@@ -25,7 +25,7 @@ function CartItem({ cart }) {
             type="button"
             size="small"
             onClick={() =>
-              changeCartQuantity(cart.id, cart.quantity, "decreament")
+              changeCartQuantity(cart.id, cart.quantity, "decrement")
             }
           >
             -
@@ -35,7 +35,7 @@ function CartItem({ cart }) {
             type="button"
             size="small"
             onClick={() =>
-              changeCartQuantity(cart.id, cart.quantity, "increament")
+              changeCartQuantity(cart.id, cart.quantity, "increment")
             }
           >
             +
