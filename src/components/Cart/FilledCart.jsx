@@ -40,7 +40,7 @@ export default function FilledCart() {
             type="button"
             variant="contained"
             color="default"
-            onClick={deleteCustomerCarts}
+            onClick={() => deleteCustomerCarts("server")}
           >
             Empty cart
           </Button>

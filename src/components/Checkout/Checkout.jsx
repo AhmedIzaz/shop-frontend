@@ -1,62 +1,141 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, Paper, Typography } from "@material-ui/core";
+import axios from "axios";
 import React from "react";
+import { useHistory } from "react-router";
 import useMethod from "../../Methods/useMethod";
 import { useStateValue } from "../../State/StateProvider";
 import useStyles from "./styles";
 function Checkout() {
   const [state, dispatch] = useStateValue();
   const classes = useStyles();
-  const { createOrder } = useMethod();
+  const history = useHistory();
+  const { createOrder, deleteCustomerCarts } = useMethod();
+  const [date, setDate] = React.useState(null);
+  // };===============
+  // ==================
+  const totalPrice = () => {
+    let total_price = 0;
+    state.customer.carts.map(
+      (cart) =>
+        (total_price = total_price + cart.quantity * parseInt(cart.price))
+    );
+    return total_price;
+  };
+  // };===============
+  // ==================
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/customer/create-order", {
+        carts: state.customer.carts,
+        delivery_date: date,
+      })
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error.message);
+        }
+        deleteCustomerCarts("client");
+        setDate(null);
+      })
+      .catch((e) => {
+        return alert(e.message);
+      });
+  };
+  // };===============
+  // ==================
   return (
     <main>
       <div className={classes.toolbar} />
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Product Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {state.customer.carts.map((cart, index) => (
-              <tr key={cart.id}>
-                <td>{index}</td>
-                <td>{cart.product_name}</td>
-                <td>{cart.quantity}</td>
-                {cart.quantity > 1 ? (
-                  <td>
-                    {cart.quantity} * {cart.price}
-                  </td>
-                ) : (
-                  <td>{cart.quantity}</td>
-                )}
+      <Paper className={classes.root} variant="elevation">
+        <div className={classes.tableWrapper}>
+          <table className={classes.table}>
+            <thead>
+              <tr>
+                <td>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    No.
+                  </Typography>
+                </td>
+                <td>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Product Name
+                  </Typography>
+                </td>
+                <td>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Quantity
+                  </Typography>
+                </td>
+                <td>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Price
+                  </Typography>
+                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className={classes.deliverySection}>
-          <div className={classes.delivery_form}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log(e.target);
-              }}
-            >
-              <label for="date">
-                <Typography>
-                  Please enter which time you want delivery
-                </Typography>
-              </label>
-              <input name="data" type="date" />
-              <Button type="submit"></Button>
-            </form>
+            </thead>
+            <br />
+            <tbody>
+              {state.customer.carts.map((cart, index) => (
+                <tr key={cart.id}>
+                  <td>{index + 1}</td>
+                  <td>{cart.product_name}</td>
+                  <td>{cart.quantity}</td>
+                  {cart.quantity > 1 ? (
+                    <td>
+                      {cart.quantity} * {cart.price}
+                    </td>
+                  ) : (
+                    <td>{cart.price}</td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <br />
+          <div className={classes.footer}>
+            <Typography variant="h5" color="primary">
+              Total Price
+            </Typography>
+            <Typography variant="h5" color="secondary">
+              {" "}
+              {totalPrice()}
+            </Typography>
           </div>
-          <div className={classes.deliveryButton}></div>
         </div>
-      </div>
+        <br />
+        <br />
+
+        <div className={classes.delivery_form}>
+          <form onSubmit={onFormSubmit}>
+            <label for="date">
+              <Typography variant="body1">
+                Please enter which time you want delivery
+              </Typography>
+            </label>
+            <br />
+            <input
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              className={classes.input}
+              name="date"
+              type="date"
+            />
+            <br />
+            <br />
+            <Button
+              onClick={() => console.log(date)}
+              color="primary"
+              variant="contained"
+              type="submit"
+              style={{ width: "100%" }}
+            >
+              Order
+            </Button>
+          </form>
+        </div>
+        <br />
+      </Paper>
     </main>
   );
 }

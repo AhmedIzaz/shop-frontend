@@ -76,17 +76,24 @@ export default function useMethod() {
     }
   };
 
-  const deleteCustomerCarts = async () => {
+  const deleteCustomerCarts = async (fromWhere) => {
     try {
-      axios
-        .post("http://localhost:8000/customer/delete-customer-cart")
-        .then(() => {
-          dispatch({
-            type: "DELETE_CUSTOMER_CARTS",
-          });
-          history.push("/");
-        })
-        .catch((e) => alert(e.message));
+      if (fromWhere == "server") {
+        axios
+          .post("http://localhost:8000/customer/delete-customer-cart")
+          .then(() => {
+            dispatch({
+              type: "DELETE_CUSTOMER_CARTS",
+            });
+            history.push("/");
+          })
+          .catch((e) => alert(e.message));
+      } else {
+        dispatch({
+          type: "DELETE_CUSTOMER_CARTS",
+        });
+        history.push("/");
+      }
     } catch (e) {
       return alert(e.message);
     }
