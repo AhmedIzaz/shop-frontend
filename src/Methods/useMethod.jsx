@@ -99,10 +99,59 @@ export default function useMethod() {
     }
   };
 
-  const createOrder = async (carts, delivery_date) => {};
+  const createOrder = async (e, delivery_date) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/customer/create-order", {
+        carts: state.customer.carts,
+        delivery_date: delivery_date,
+      })
+      .then((response) => {
+        if (response.data.error) {
+          return alert(response.data.error.message);
+        }
+        return deleteCustomerCarts("client");
+      })
+      .catch((e) => {
+        return alert(e.message);
+      });
+  };
+
+  const clearOrder = async (customer_id) => {
+    try {
+      let product_id_list = [];
+      await state.owner.order_list.map((info) => {
+        if (info.customer_id == customer_id) {
+          info.customer_orders.map((order) =>
+            product_id_list.push(order.product_id)
+          );
+        }
+      });
+
+      await axios
+        .post("http://localhost:8000/owner/clear-order", {
+          product_id_list: product_id_list,
+          customer_id: customer_id,
+        })
+        .then((response) => {
+          let order_list = state.owner.order_list.filter(
+            (info) => info.customer_id != customer_id
+          );
+          dispatch({
+            type: "ADD_ORDERS_TO_OWNER",
+            order_list: order_list,
+          });
+          return history.push("/owner-dashboard");
+        })
+        .catch((e) => alert(e.message));
+    } catch (e) {
+      alert(e.message);
+    }
+  };
 
   return {
     createOrder,
+    clearOrder,
     addToCustomerCart,
     removeCartFromCustomerCart,
     deleteCustomerCarts,

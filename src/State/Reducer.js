@@ -1,4 +1,5 @@
 export const InitialState = {
+  owner: null,
   customer: null,
   categories: [],
   products: [],
@@ -7,9 +8,6 @@ export const InitialState = {
 
 const Reducer = (state, action) => {
   switch (action.type) {
-    // ==================================
-    // ==================================
-
     case "ADD_CUSTOMER_AND_CARTS_TO_STATE":
       return {
         ...state,
@@ -59,6 +57,29 @@ const Reducer = (state, action) => {
       return {
         ...state,
         categories: action.categories,
+      };
+
+    case "ADD_OWNER_AND_ORDERS_TO_STATE":
+      return {
+        ...state,
+        owner: {
+          ...action.owner,
+          order_list: action.order_list,
+        },
+      };
+
+    case "ADD_ORDERS_TO_OWNER":
+      return {
+        ...state,
+        owner: {
+          ...state.owner,
+          order_list: action.order_list,
+        },
+      };
+    case "REMOVE_OWNER_FROM_STATE":
+      return {
+        ...state,
+        owner: null,
       };
 
     default:

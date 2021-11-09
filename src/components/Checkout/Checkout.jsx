@@ -1,15 +1,12 @@
 import { Button, Paper, Typography } from "@material-ui/core";
-import axios from "axios";
 import React from "react";
-import { useHistory } from "react-router";
 import useMethod from "../../Methods/useMethod";
 import { useStateValue } from "../../State/StateProvider";
 import useStyles from "./styles";
 function Checkout() {
   const [state, dispatch] = useStateValue();
   const classes = useStyles();
-  const history = useHistory();
-  const { createOrder, deleteCustomerCarts } = useMethod();
+  const { createOrder } = useMethod();
   const [date, setDate] = React.useState(null);
   // };===============
   // ==================
@@ -23,26 +20,7 @@ function Checkout() {
   };
   // };===============
   // ==================
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8000/customer/create-order", {
-        carts: state.customer.carts,
-        delivery_date: date,
-      })
-      .then((response) => {
-        if (response.data.error) {
-          alert(response.data.error.message);
-        }
-        deleteCustomerCarts("client");
-        setDate(null);
-      })
-      .catch((e) => {
-        return alert(e.message);
-      });
-  };
-  // };===============
-  // ==================
+
   return (
     <main>
       <div className={classes.toolbar} />
@@ -97,7 +75,6 @@ function Checkout() {
               Total Price
             </Typography>
             <Typography variant="h5" color="secondary">
-              {" "}
               {totalPrice()}
             </Typography>
           </div>
@@ -106,7 +83,12 @@ function Checkout() {
         <br />
 
         <div className={classes.delivery_form}>
-          <form onSubmit={onFormSubmit}>
+          <form
+            onSubmit={(e) => {
+              createOrder(e, date);
+              setDate(null);
+            }}
+          >
             <label for="date">
               <Typography variant="body1">
                 Please enter which time you want delivery

@@ -13,6 +13,9 @@ import Categories from "./components/Categories/Categories";
 import CategoriesProduct from "./components/Categories/CategoriesProduct";
 import Contact from "./components/Contact/Contact";
 import Checkout from "./components/Checkout/Checkout";
+import OwnerDashboard from "./components/Owner/OwnerDashboard";
+import OwnerLogin from "./components/Owner/Login/OwnerLogin";
+import OwnerLogout from "./components/Owner/OwnerLogout";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -61,8 +64,11 @@ export default function App() {
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
+        <Route exact path="/customer-logout" component={Logout} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/owner-login" component={OwnerLogin} />
+        <Route exact path="/owner-dashboard" component={OwnerDashboard} />
+        <Route exact path="/owner-logout" component={OwnerLogout} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import useStyles from "./styles";
+import { Card, Typography, Button, TextField } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { Card, TextField, Button, Typography } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../../../State/StateProvider";
+// ================================
+// ================================
 const schema = Yup.object({
   password: Yup.string().min(8).max(32).required(),
   email: Yup.string().email().required(),
 });
-function Login() {
+// ================================
+// ================================
+// ================================
+// ================================
+function OwnerLogin() {
   axios.defaults.withCredentials = true;
   const [state, dispatch] = useStateValue();
   const history = useHistory();
-
   const classes = useStyles();
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -26,13 +31,15 @@ function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  // ================================
+  // ================================
   const onSubmit = async ({ email, password }) => {
     axios
-      .post("http://localhost:8000/customer/customer-login", {
+      .post("http://localhost:8000/owner/login", {
         email,
         password,
       })
-      .then(async (response) => {
+      .then((response) => {
         if (response.data.error) {
           return response.data.error.email
             ? setEmailError(response.data.error.email)
@@ -40,17 +47,20 @@ function Login() {
         }
         setEmailError(null);
         setPasswordError(null);
-        if (response.data.customer.email == email) {
-          await dispatch({
-            type: "ADD_CUSTOMER_AND_CARTS_TO_STATE",
-            customer: response.data.customer,
-            carts: response.data.carts,
+        if (response.data.owner.email == email) {
+          const { owner, order_list } = response.data;
+          dispatch({
+            type: "ADD_OWNER_AND_ORDERS_TO_STATE",
+            owner: owner,
+            order_list: order_list,
           });
-          return history.push("/");
+          return history.push("/owner-dashboard");
         }
       })
       .catch((e) => alert(e.message));
   };
+  // ================================
+  // ================================
   return (
     <main style={{ backgroundColor: "#f9f9f9" }}>
       <div className={classes.toolbar} />
@@ -58,7 +68,7 @@ function Login() {
         <Card variant="elevation" className={classes.formWrapper}>
           <center>
             <Typography variant="h5" color="primary">
-              Login Form
+              Owner Login Form
             </Typography>
           </center>
           <br />
@@ -125,12 +135,12 @@ function Login() {
 
                 <Typography
                   component={Link}
-                  to="/owner-login"
+                  to="/login"
                   variant="body2"
                   color="textSecondary"
                   style={{ textDecoration: "none" }}
                 >
-                  Login as owner?
+                  Login as Customer?
                 </Typography>
               </div>
             </div>
@@ -141,4 +151,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default OwnerLogin;

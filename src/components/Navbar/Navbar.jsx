@@ -60,19 +60,36 @@ export default function Navbar({ cartLength }) {
             </Typography>
           </div>
           <div className={classes.grow} />
-          {state.customer && location.pathname !== "/login" ? (
+          {state.customer || state.owner ? (
             <div className={classes.profile}>
               <Avatar />
-              <Typography>{state.customer.username}</Typography>
-              <Button
-                component={Link}
-                to="/logout"
-                variant="contained"
-                color="secondary"
-                size="small"
-              >
-                Logout
-              </Button>
+              {state.customer ? (
+                <>
+                  <Typography>{state.customer.username}</Typography>
+                  <Button
+                    component={Link}
+                    to="/customer-logout"
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Typography>{state.owner.username}</Typography>
+                  <Button
+                    component={Link}
+                    to="/owner-logout"
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                  >
+                    Logout
+                  </Button>
+                </>
+              )}
             </div>
           ) : (
             <div className={classes.actions}>
@@ -87,7 +104,8 @@ export default function Navbar({ cartLength }) {
                   Register
                 </Button>
               )}
-              {location.pathname !== "/login" && (
+              {location.pathname !== "/login" &&
+              location.pathname !== "/owner-login" ? (
                 <Button
                   component={Link}
                   to="/login"
@@ -97,7 +115,7 @@ export default function Navbar({ cartLength }) {
                 >
                   Login
                 </Button>
-              )}
+              ) : null}
             </div>
           )}
 

@@ -2,20 +2,21 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
-  formWrapper: {
-    padding: "5%",
-    width: "40%",
-    margin: "auto",
-  },
-  formFooter: {
+  container: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    alignItems: "center",
+    padding: "1%",
+    backgroundColor: "#e5e5e5",
   },
-  link: {
+  option_bar: {},
+  dashboard_wrapper: {
+    width: "80%",
+  },
+  order_item: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
+    justifyContent: "space-around",
   },
 }));
