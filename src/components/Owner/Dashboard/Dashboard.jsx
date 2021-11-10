@@ -1,30 +1,45 @@
 import React from "react";
 import useStyles from "./styles";
-import { useStateValue } from "../../State/StateProvider";
+import { Link } from "react-router-dom";
 import { Button, Paper, Typography } from "@material-ui/core";
-import useMethod from "../../Methods/useMethod";
-// ==================
-// ==================
-function OwnerDashboard() {
-  const [state, dispatch] = useStateValue();
+import { useStateValue } from "../../../State/StateProvider";
+import useMethod from "../../../Methods/useMethod";
+function Dashboard() {
   const classes = useStyles();
+  const [state, dispatch] = useStateValue();
   const { clearOrder } = useMethod();
 
-  // ==================
-  // ==================
   return (
     <main>
       <div className={classes.toolbar} />
       <div className={classes.container}>
         <div className={classes.option_bar}>
-          <Typography>Products</Typography>
-          <Typography>Create Product</Typography>
-          <Typography>Customers</Typography>
+          <Typography
+            className={classes.link}
+            component={Link}
+            to="/owner/products"
+          >
+            Products
+          </Typography>
+          <Typography
+            className={classes.link}
+            component={Link}
+            to="/owner/create-product"
+          >
+            Create Product
+          </Typography>
+          <Typography
+            className={classes.link}
+            component={Link}
+            to="/owner/shop-customers"
+          >
+            Customers
+          </Typography>
         </div>
-        <Paper className={classes.dashboard_wrapper} variant="elevation">
+        <div className={classes.dashboard_wrapper}>
           <div className={classes.orders_list}>
             {state.owner.order_list.map((obj, index) => (
-              <div className={classes.order_item}>
+              <Paper variant="elevation" className={classes.order_item}>
                 <Typography>
                   <strong>({index + 1})</strong> orders of {obj.customer_name}
                 </Typography>
@@ -46,13 +61,13 @@ function OwnerDashboard() {
                     Completed
                   </Button>
                 </div>
-              </div>
+              </Paper>
             ))}
           </div>
-        </Paper>
+        </div>
       </div>
     </main>
   );
 }
 
-export default OwnerDashboard;
+export default Dashboard;

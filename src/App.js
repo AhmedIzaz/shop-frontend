@@ -3,7 +3,7 @@ import Navigationbar from "./components/Navbar/Navbar";
 import Products from "./components/Products/Products";
 import axios from "axios";
 import Cart from "./components/Cart/Cart";
-import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useStateValue } from "./State/StateProvider";
 import Login from "./components/Authentications/Login/Login";
 import Register from "./components/Authentications/Register/Register";
@@ -13,9 +13,14 @@ import Categories from "./components/Categories/Categories";
 import CategoriesProduct from "./components/Categories/CategoriesProduct";
 import Contact from "./components/Contact/Contact";
 import Checkout from "./components/Checkout/Checkout";
-import OwnerDashboard from "./components/Owner/OwnerDashboard";
+
 import OwnerLogin from "./components/Owner/Login/OwnerLogin";
+import Dashboard from "./components/Owner/Dashboard/Dashboard";
 import OwnerLogout from "./components/Owner/OwnerLogout";
+import CreateProduct from "./components/Owner/Products/Create Products/CreateProduct";
+import ShopProducts from "./components/Owner/Products/Shop Products/ShopProducts";
+import Customers from "./components/Owner/Customers/Customers";
+import ErrorPage from "./components/ErrorPage";
 
 export default function App() {
   const [state, dispatch] = useStateValue();
@@ -60,15 +65,23 @@ export default function App() {
           path="/categories-product/:category_id"
           component={CategoriesProduct}
         />
+        <Route exact path="/contact" component={Contact} />
+        {/* =================== Customer Part ================= */}
+        {/* =================================================== */}
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/customer-logout" component={Logout} />
-        <Route exact path="/contact" component={Contact} />
+        {/* ==================== Owner Part ==================== */}
+        {/* ==================================================== */}
         <Route exact path="/owner-login" component={OwnerLogin} />
-        <Route exact path="/owner-dashboard" component={OwnerDashboard} />
-        <Route exact path="/owner-logout" component={OwnerLogout} />
+        <Route exact path="/owner/dashboard" component={Dashboard} />
+        <Route exact path="/owner/owner-logout" component={OwnerLogout} />
+        <Route exact path="/owner/create-product" component={CreateProduct} />
+        <Route exact path="/owner/products" component={ShopProducts} />
+        <Route exact path="/owner/shop-customers" component={Customers} />
+        <Route component={ErrorPage} />
       </Switch>
     </BrowserRouter>
   );

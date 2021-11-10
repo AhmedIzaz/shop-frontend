@@ -59,12 +59,14 @@ const Reducer = (state, action) => {
         categories: action.categories,
       };
 
-    case "ADD_OWNER_AND_ORDERS_TO_STATE":
+    case "ADD_OWNER_PRODUCTS_ORDERS_AND_CUSTOMERS_TO_STATE":
       return {
         ...state,
         owner: {
           ...action.owner,
           order_list: action.order_list,
+          products: action.products,
+          customers: action.customers,
         },
       };
 

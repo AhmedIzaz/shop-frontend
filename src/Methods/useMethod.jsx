@@ -141,7 +141,7 @@ export default function useMethod() {
             type: "ADD_ORDERS_TO_OWNER",
             order_list: order_list,
           });
-          return history.push("/owner-dashboard");
+          return history.push("/owner/dashboard");
         })
         .catch((e) => alert(e.message));
     } catch (e) {

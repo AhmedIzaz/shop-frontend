@@ -48,13 +48,15 @@ function OwnerLogin() {
         setEmailError(null);
         setPasswordError(null);
         if (response.data.owner.email == email) {
-          const { owner, order_list } = response.data;
+          const { owner, order_list, products, customers } = response.data;
           dispatch({
-            type: "ADD_OWNER_AND_ORDERS_TO_STATE",
+            type: "ADD_OWNER_PRODUCTS_ORDERS_AND_CUSTOMERS_TO_STATE",
             owner: owner,
             order_list: order_list,
+            products: products,
+            customers: customers,
           });
-          return history.push("/owner-dashboard");
+          return history.push("/owner/dashboard");
         }
       })
       .catch((e) => alert(e.message));

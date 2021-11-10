@@ -32,33 +32,47 @@ export default function Navbar({ cartLength }) {
               <ShopSharp />
             </IconButton>
           </div>
-          <Typography
-            component={Link}
-            to="/"
-            variant="h6"
-            color="inherit"
-            className={classes.title}
-          >
-            My Shop
-          </Typography>
-
-          <div>
-            <Typography variant="body2">
-              <div className={classes.links}>
-                <Button component={Link} to="/">
-                  Home
-                </Button>
-
-                <Button component={Link} to="/categories">
-                  Categories
-                </Button>
-
-                <Button component={Link} to="/contact">
-                  Contact
-                </Button>
-              </div>
+          {state.owner ? (
+            <Typography
+              component={Link}
+              to="/owner/dashboard"
+              variant="h6"
+              color="inherit"
+              className={classes.title}
+            >
+              My Shop
             </Typography>
-          </div>
+          ) : (
+            <Typography
+              component={Link}
+              to="/"
+              variant="h6"
+              color="inherit"
+              className={classes.title}
+            >
+              My Shop
+            </Typography>
+          )}
+
+          {!state.owner && (
+            <div>
+              <Typography variant="body2">
+                <div className={classes.links}>
+                  <Button component={Link} to="/">
+                    Home
+                  </Button>
+
+                  <Button component={Link} to="/categories">
+                    Categories
+                  </Button>
+
+                  <Button component={Link} to="/contact">
+                    Contact
+                  </Button>
+                </div>
+              </Typography>
+            </div>
+          )}
           <div className={classes.grow} />
           {state.customer || state.owner ? (
             <div className={classes.profile}>
@@ -81,7 +95,7 @@ export default function Navbar({ cartLength }) {
                   <Typography>{state.owner.username}</Typography>
                   <Button
                     component={Link}
-                    to="/owner-logout"
+                    to="/owner/owner-logout"
                     variant="contained"
                     color="secondary"
                     size="small"
