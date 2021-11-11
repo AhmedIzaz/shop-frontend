@@ -117,6 +117,28 @@ export default function useMethod() {
       });
   };
 
+  const delete_owner_product = async (product_id) => {
+    try {
+      await axios
+        .post("http://localhost:8000/owner/delete-product", { id: product_id })
+        .then((response) => {
+          if (response.status == 200) {
+            dispatch({
+              type: "DELETE_PRODUCT_FROM_STATE",
+              products: state.products.filter(
+                (product) => product.id != product_id
+              ),
+            });
+            return;
+          }
+          return alert("cant delete the product");
+        })
+        .catch((e) => alert(e.message));
+    } catch (e) {
+      return alert(e.message);
+    }
+  };
+
   const clearOrder = async (customer_id) => {
     try {
       let product_id_list = [];
@@ -151,6 +173,7 @@ export default function useMethod() {
 
   return {
     createOrder,
+    delete_owner_product,
     clearOrder,
     addToCustomerCart,
     removeCartFromCustomerCart,

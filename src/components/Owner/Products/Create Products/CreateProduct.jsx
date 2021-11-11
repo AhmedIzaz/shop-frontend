@@ -11,17 +11,20 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { useStateValue } from "../../../../State/StateProvider";
+import axios from "axios";
+import { useHistory } from "react-router";
 const schema = Yup.object({
   product_name: Yup.string().min(3).max(100).required(),
   picture: Yup.string().required(),
   description: Yup.string().required(),
   price: Yup.number().required(),
-  available: Yup.boolean().required(),
+  available: Yup.string().required(),
   ProductCategoryId: Yup.string().required(),
 });
 // =============================
 // =============================
 function CreateProduct() {
+  const history = useHistory();
   const [state, dispatch] = useStateValue();
   const [productCategoryId, setProductCategoryId] = useState("");
   const handleChange = (event) => setProductCategoryId(event.target.value);
@@ -41,14 +44,26 @@ function CreateProduct() {
     available,
     ProductCategoryId,
   }) => {
-    console.log(
-      product_name,
-      picture,
-      description,
-      price,
-      available,
-      ProductCategoryId
-    );
+    await axios
+      .post("http://localhost:8000/owner/create-product", {
+        product_name: product_name,
+        picture: picture,
+        description: description,
+        price: price,
+        available: available,
+        ProductCategoryId: ProductCategoryId,
+      })
+      .then(async (response) => {
+        if (response.status == 200) {
+          await dispatch({
+            type: "ADD_PRODUCT_TO_STATE",
+            product: response.data.product,
+          });
+          return history.push("/owner/dashboard");
+        }
+        return alert("status is not 200");
+      })
+      .catch((e) => alert(e.message));
   };
   // ===============================
   // ===============================
@@ -81,13 +96,21 @@ function CreateProduct() {
           <br />
           {/* ================================== */}
           <label for="picture">
-            <Typography variant="subtitle1">Picture</Typography>
+            <Typography variant="subtitle1">
+              Picture (online url only for this time)
+            </Typography>
           </label>
           <Controller
             name="picture"
             control={control}
             render={({ field }) => (
-              <TextField type="text" fullWidth variant="standard" {...field} />
+              <TextField
+                placeholder="http://demo.jpg etc"
+                type="text"
+                fullWidth
+                variant="standard"
+                {...field}
+              />
             )}
           />
           <Typography variant="body2" color="secondary">
@@ -118,6 +141,7 @@ function CreateProduct() {
             control={control}
             render={({ field }) => (
               <TextField
+                placeholder="in taka ৳"
                 type="number"
                 fullWidth
                 variant="standard"
@@ -131,7 +155,9 @@ function CreateProduct() {
           <br />
           {/* ================================== */}
           <label for="available">
-            <Typography variant="subtitle1">Available?</Typography>
+            <Typography variant="subtitle1">
+              Available? type yes or no
+            </Typography>
           </label>
           <Controller
             name="available"

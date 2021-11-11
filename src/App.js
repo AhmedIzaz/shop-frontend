@@ -13,7 +13,6 @@ import Categories from "./components/Categories/Categories";
 import CategoriesProduct from "./components/Categories/CategoriesProduct";
 import Contact from "./components/Contact/Contact";
 import Checkout from "./components/Checkout/Checkout";
-
 import OwnerLogin from "./components/Owner/Login/OwnerLogin";
 import Dashboard from "./components/Owner/Dashboard/Dashboard";
 import OwnerLogout from "./components/Owner/OwnerLogout";
@@ -29,18 +28,14 @@ export default function App() {
     try {
       await axios
         .get("http://localhost:8000/product/products")
-        .then((productList) => {
+        .then(({ data }) => {
           dispatch({
             type: "ADD_PRODUCTS_TO_STATE",
-            products: productList.data,
+            products: data.products,
           });
-        });
-      await axios
-        .get("http://localhost:8000/category/categories")
-        .then((categoryList) => {
           dispatch({
             type: "ADD_CATEGORIES_TO_STATE",
-            categories: categoryList.data.categories,
+            categories: data.categories,
           });
         });
     } catch (e) {

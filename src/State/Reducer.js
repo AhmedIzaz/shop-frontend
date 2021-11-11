@@ -53,6 +53,18 @@ const Reducer = (state, action) => {
         products: action.products,
       };
 
+    case "ADD_PRODUCT_TO_STATE":
+      return {
+        ...state,
+        products: [...state.products, action.product],
+      };
+
+    case "DELETE_PRODUCT_FROM_STATE":
+      return {
+        ...state,
+        products: action.products,
+      };
+
     case "ADD_CATEGORIES_TO_STATE":
       return {
         ...state,

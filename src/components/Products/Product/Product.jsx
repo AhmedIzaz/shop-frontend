@@ -12,8 +12,11 @@ import {
 import useStyles from "./styles";
 import useMethod from "../../../Methods/useMethod";
 import { Link } from "react-router-dom";
-
+import { useStateValue } from "../../../State/StateProvider";
+// ============================
+// ==============================
 export default function Product({ product }) {
+  const [state, dispatch] = useStateValue();
   const classes = useStyles();
   const { addToCustomerCart } = useMethod();
   return (
@@ -46,14 +49,16 @@ export default function Product({ product }) {
         </CardContent>
       </Link>
 
-      <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton
-          aria-label="add to cart"
-          onClick={() => addToCustomerCart(product.id)}
-        >
-          <AddShoppingCart />
-        </IconButton>
-      </CardActions>
+      {state.customer && (
+        <CardActions disableSpacing className={classes.cardActions}>
+          <IconButton
+            aria-label="add to cart"
+            onClick={() => addToCustomerCart(product.id)}
+          >
+            <AddShoppingCart />
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
   );
 }
